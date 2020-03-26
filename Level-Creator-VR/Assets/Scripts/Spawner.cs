@@ -6,7 +6,9 @@ public class Spawner : MonoBehaviour
 {
     private bool spawnOnce;
     public List<GameObject> spawnedObjects;
-    public GameObject cube;
+    public GameObject cubePrefab;
+    public GameObject cubeHand;
+    public GameObject testObject;
 
     void Start()
     {
@@ -16,12 +18,10 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-
         if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") > 0.3f && !spawnOnce)
         {
             spawnOnce = true;
-            spawnedObjects.Add(Instantiate(cube, cube.transform.position, cube.transform.rotation));
+            spawnedObjects.Add(Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation));
             spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
 
         }
@@ -30,6 +30,13 @@ public class Spawner : MonoBehaviour
             if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") < 0.3f)
                 spawnOnce = false;
         }
-           
+
+        foreach(GameObject g in spawnedObjects)
+        {
+            if(Vector3.Distance(testObject.transform.position, g.transform.position) <= 1)
+            {
+                
+            }
+        }
     }
 }
