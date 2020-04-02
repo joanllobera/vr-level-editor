@@ -5,6 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - cube
+  - settings
+  - exit
+  - tutorial
+  - levels
+  - cheats
+  - activateCube
+  - activateLight
+  - activatePlayer
+  - undo
   layers:
   - Default
   - TransparentFX
