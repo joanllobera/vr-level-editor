@@ -17,6 +17,8 @@ public class Spawner : MonoBehaviour
 
     private bool cube, light, player;
 
+    Stack<GameObject> removedObjects;
+
     void Start()
     {
 
@@ -44,6 +46,36 @@ public class Spawner : MonoBehaviour
             playerHand.GetComponent<Renderer>().enabled = true;
         }
 
+        //**** START ***** Nil code CONTROL-Z **** 
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            //fem el push de l'ultim element que s'ha posat a la llista
+            removedObjects.Push(spawnedObjects[spawnedObjects.Count - 1]);
+            //Borrar l'element de la llista
+            spawnedObjects.RemoveAt(spawnedObjects.Count - 1);
+            //Desactivar el objecte per que no es vegi
+            removedObjects.Peek().SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            GameObject g = removedObjects.Pop();
+            g.SetActive(true);
+            spawnedObjects.Add(g);
+        }
+
+        //Test Intantiate cube with out VR
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            spawnedObjects.Add(Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation));
+
+            //Si poses un element es borra l'Stack de "Control+Y"
+            if(removedObjects.Count > 0)
+            {
+                removedObjects.Clear();
+            }
+        }
+        //**** END ***** Nil code CONTROL-Z **** 
 
         if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") > 0.3f && !spawnOnce)
         {
