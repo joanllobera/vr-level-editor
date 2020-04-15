@@ -13,5 +13,6 @@ public class Cube_Hand_Behaviour : MonoBehaviour
                                          Mathf.Round(handParent.position.z));
 
         //transform.rotation = Quaternion.identity;
+
     }
 }
