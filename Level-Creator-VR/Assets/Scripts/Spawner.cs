@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Spawner : MonoBehaviour
 {
     private bool spawnOnce;
+    private bool deleteOnce;
+    private bool delete;
     public List<GameObject> spawnedObjects;
     public GameObject cubePrefab;
     public GameObject leftHand;
@@ -13,6 +15,8 @@ public class Spawner : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject cubeHand, lightHand, playerHand;
     public GameObject testObject;
+    public Material cubeMat;
+    public Material deleteMat;
     public List<GameObject> selectionText = new List<GameObject>();
 
     private bool cube, light, player;
@@ -51,8 +55,27 @@ public class Spawner : MonoBehaviour
 
             if(cube)
             {
-                spawnedObjects.Add(Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation));
-                spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
+                if(delete)
+                {
+                    deleteOnce = true;
+                    if (cube)
+                    {
+                        foreach (GameObject cub in spawnedObjects)
+                        {
+                            if (cub.transform.position == cubeHand.transform.position)
+                            {
+                                Destroy(cub);
+                                spawnedObjects.Remove(cub);
+
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    spawnedObjects.Add(Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation));
+                    spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
+                }
             }
             else if(light)
             {
@@ -71,6 +94,34 @@ public class Spawner : MonoBehaviour
             if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") < 0.3f)
                 spawnOnce = false;
         }
+        if (Input.GetAxis("Oculus_CrossPlatform_SecondaryHandTrigger") > 0.3f/*& !deleteOnce*/)
+        {
+            delete = true;
+            cubeHand.GetComponent<MeshRenderer>().material = deleteMat;
+            /*deleteOnce = true;
+            if(cube)
+            {
+                foreach (GameObject cub in spawnedObjects)
+                {
+                    if(cub.transform.position == cubeHand.transform.position)
+                    {
+                        Destroy(cub);
+                        spawnedObjects.Remove(cub);
+                        
+                    }
+                }
+            }*/
+
+        }
+        else
+        {
+            if (Input.GetAxis("Oculus_CrossPlatform_SecondaryHandTrigger") < 0.3f)
+            {
+                cubeHand.GetComponent<MeshRenderer>().material = cubeMat;
+                delete = false;
+            }              
+        }
+
 
         /*foreach(GameObject g in spawnedObjects)
         {
