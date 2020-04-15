@@ -136,6 +136,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2863212489384232611, guid: 0219c046a5f81c54eafe175d32a25b26,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2863212489384232615, guid: 0219c046a5f81c54eafe175d32a25b26,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -920,6 +925,8 @@ MonoBehaviour:
   playerHand: {fileID: 2863212489384232611, guid: 0219c046a5f81c54eafe175d32a25b26,
     type: 3}
   testObject: {fileID: 0}
+  cubeMat: {fileID: 2100000, guid: 48afe1db0a7d92544a2dcf45441b4337, type: 2}
+  deleteMat: {fileID: 2100000, guid: 13a8d91c31c435c428110d6e09ce1e4c, type: 2}
   selectionText:
   - {fileID: 595042519}
   - {fileID: 595042518}

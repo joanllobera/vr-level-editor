@@ -57,7 +57,6 @@ public class Spawner : MonoBehaviour
             {
                 if(delete)
                 {
-                    deleteOnce = true;
                     if (cube)
                     {
                         foreach (GameObject cub in spawnedObjects)
