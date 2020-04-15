@@ -196,7 +196,13 @@ PrefabInstance:
       propertyPath: handParent
       value: 
       objectReference: {fileID: 2098184029}
-    m_RemovedComponents: []
+    - target: {fileID: 1492490081705142213, guid: 0219c046a5f81c54eafe175d32a25b26,
+        type: 3}
+      propertyPath: handParent
+      value: 
+      objectReference: {fileID: 2098184029}
+    m_RemovedComponents:
+    - {fileID: 2863212489384232614, guid: 0219c046a5f81c54eafe175d32a25b26, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0219c046a5f81c54eafe175d32a25b26, type: 3}
 --- !u!1 &498158248 stripped
 GameObject:
