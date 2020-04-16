@@ -19,11 +19,12 @@ public class Spawner : MonoBehaviour
     public Material deleteMat;
     public List<GameObject> selectionText = new List<GameObject>();
 
-    private bool cube, light, player;
+    public bool cube, light, player;
 
     void Start()
     {
-
+        delete = false;
+        cube = true;
     }
 
     // Update is called once per frame
@@ -31,21 +32,21 @@ public class Spawner : MonoBehaviour
     {
         if (cube)
         {
-            cubeHand.GetComponent<Renderer>().enabled = true;
-            lightHand.GetComponent<Renderer>().enabled = false;
-            playerHand.GetComponent<Renderer>().enabled = false;
+            cubeHand.SetActive(true);
+            lightHand.SetActive(false);
+            playerHand.SetActive(false);
         }
         else if (light)
         {
-            cubeHand.GetComponent<Renderer>().enabled = false;
-            lightHand.GetComponent<Renderer>().enabled = true;
-            playerHand.GetComponent<Renderer>().enabled = false;
+            cubeHand.SetActive(false);
+            lightHand.SetActive(true);
+            playerHand.SetActive(false);
         }
         else if (player)
         {
-            cubeHand.GetComponent<Renderer>().enabled = false;
-            lightHand.GetComponent<Renderer>().enabled = false;
-            playerHand.GetComponent<Renderer>().enabled = true;
+            cubeHand.SetActive(false);
+            lightHand.SetActive(false);
+            playerHand.SetActive(true);
         }
 
 
@@ -97,7 +98,7 @@ public class Spawner : MonoBehaviour
         {
             delete = true;
             cubeHand.GetComponent<MeshRenderer>().material = deleteMat;
-            /*deleteOnce = true;
+            deleteOnce = true;
             if(cube)
             {
                 foreach (GameObject cub in spawnedObjects)
@@ -109,7 +110,7 @@ public class Spawner : MonoBehaviour
                         
                     }
                 }
-            }*/
+            }
 
         }
         else
@@ -118,7 +119,7 @@ public class Spawner : MonoBehaviour
             {
                 cubeHand.GetComponent<MeshRenderer>().material = cubeMat;
                 delete = false;
-            }              
+            }
         }
 
 

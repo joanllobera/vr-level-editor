@@ -221,6 +221,11 @@ PrefabInstance:
       propertyPath: placeableMat
       value: 
       objectReference: {fileID: 2100000, guid: 687c512b0b20c0742814007014df3122, type: 2}
+    - target: {fileID: 2863212489384232609, guid: 0219c046a5f81c54eafe175d32a25b26,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2863212489384232614, guid: 0219c046a5f81c54eafe175d32a25b26, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0219c046a5f81c54eafe175d32a25b26, type: 3}
@@ -419,6 +424,11 @@ PrefabInstance:
       propertyPath: handParent
       value: 
       objectReference: {fileID: 2098184029}
+    - target: {fileID: 2863212489384232609, guid: 4385bbaf6d8d75c4baa1597326b5935d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4385bbaf6d8d75c4baa1597326b5935d, type: 3}
 --- !u!1001 &595042515
@@ -956,6 +966,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 595042515}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &641144471 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2863212489384232611, guid: 0219c046a5f81c54eafe175d32a25b26,
+    type: 3}
+  m_PrefabInstance: {fileID: 185673805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &832436023 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2863212489384232611, guid: 4385bbaf6d8d75c4baa1597326b5935d,
+    type: 3}
+  m_PrefabInstance: {fileID: 591986504}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &945102002 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: 126d619cf4daa52469682f85c1378b4a,
@@ -983,10 +1005,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 2863212489384232611, guid: ba2981bbfd47a004c859a9ea3b0e24c8,
     type: 3}
   cubeHand: {fileID: 498158248}
-  lightHand: {fileID: 2863212489384232611, guid: 4385bbaf6d8d75c4baa1597326b5935d,
-    type: 3}
-  playerHand: {fileID: 2863212489384232611, guid: 0219c046a5f81c54eafe175d32a25b26,
-    type: 3}
+  lightHand: {fileID: 832436023}
+  playerHand: {fileID: 641144471}
   testObject: {fileID: 0}
   cubeMat: {fileID: 2100000, guid: 48afe1db0a7d92544a2dcf45441b4337, type: 2}
   deleteMat: {fileID: 2100000, guid: 13a8d91c31c435c428110d6e09ce1e4c, type: 2}
@@ -995,6 +1015,9 @@ MonoBehaviour:
   - {fileID: 595042518}
   - {fileID: 595042517}
   - {fileID: 595042516}
+  cube: 0
+  light: 0
+  player: 0
 --- !u!1 &1236245382
 GameObject:
   m_ObjectHideFlags: 0
