@@ -35,9 +35,15 @@ public class Player_Hand_Behaviour : MonoBehaviour
         //transform.rotation = Quaternion.identity;
 
         raycastedObjects = new List<RaycastedObject>();
+        Debug.DrawRay(handParent.position, handParent.TransformDirection(Vector3.up) * 2, Color.red);
+        Debug.DrawRay(handParent.position, handParent.TransformDirection(Vector3.down) * 2, Color.red);
+        Debug.DrawRay(handParent.position, handParent.TransformDirection(Vector3.right) * 2, Color.red);
+        Debug.DrawRay(handParent.position, handParent.TransformDirection(Vector3.left) * 2, Color.red);
+        Debug.DrawRay(handParent.position, handParent.TransformDirection(Vector3.forward) * 2, Color.red);
+        Debug.DrawRay(handParent.position, handParent.TransformDirection(Vector3.back) * 2, Color.red);
 
         //Raycast up
-        if(Physics.Raycast(transform.position, Vector3.up, out hit, 2f))
+        if(Physics.Raycast(handParent.position, handParent.TransformDirection(Vector3.up) * 2.5f, out hit, 2f))
         {
             if(hit.transform.tag == "cube")
             {
@@ -46,7 +52,7 @@ public class Player_Hand_Behaviour : MonoBehaviour
             }
         }
         //Raycast down
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, 2f))
+        if(Physics.Raycast(handParent.position, handParent.TransformDirection(Vector3.down) * 2.5f, out hit, 2f))
         {
             if(hit.transform.tag == "cube")
             {
@@ -55,7 +61,7 @@ public class Player_Hand_Behaviour : MonoBehaviour
             }
         }   
         //Raycast Right
-        if(Physics.Raycast(transform.position, Vector3.right, out hit, 2f))
+        if(Physics.Raycast(handParent.position, handParent.TransformDirection(Vector3.right) * 2.5f, out hit, 2f))
         {
             if(hit.transform.tag == "cube")
             {
@@ -64,7 +70,7 @@ public class Player_Hand_Behaviour : MonoBehaviour
             }
         }  
         //Raycast Left
-        if(Physics.Raycast(transform.position, Vector3.left, out hit, 2f))
+        if(Physics.Raycast(handParent.position, handParent.TransformDirection(Vector3.left) * 2.5f, out hit, 2f))
         {
             if(hit.transform.tag == "cube")
             {
@@ -73,7 +79,7 @@ public class Player_Hand_Behaviour : MonoBehaviour
             }
         }  
         //Raycast forward
-        if(Physics.Raycast(transform.position, Vector3.forward, out hit, 2f))
+        if(Physics.Raycast(handParent.position, handParent.TransformDirection(Vector3.forward) * 2.5f, out hit, 2f))
         {
             if(hit.transform.tag == "cube")
             {
@@ -82,7 +88,7 @@ public class Player_Hand_Behaviour : MonoBehaviour
             }
         }  
         //Raycast backwards
-        if(Physics.Raycast(transform.position, Vector3.back, out hit, 2f))
+        if(Physics.Raycast(transform.position, handParent.TransformDirection(Vector3.back) * 2.5f, out hit, 2f))
         {
             if(hit.transform.tag == "cube")
             {
@@ -91,21 +97,23 @@ public class Player_Hand_Behaviour : MonoBehaviour
             }
         }  
 
-        float minDist = Mathf.Infinity;
-        RaycastedObject closestObject = new RaycastedObject(null, Direction.Up);
-
-        foreach(RaycastedObject obj in raycastedObjects)
-        {
-            float dist = Vector3.Distance(obj.transform.position, transform.position);
-            if(dist < minDist)
-            {
-                closestObject = obj;
-                minDist = dist;
-            }
-        }
+        
 
         if(raycastedObjects.Count > 0)
         {
+            float minDist = Mathf.Infinity;
+            RaycastedObject closestObject = new RaycastedObject(null, Direction.Up);
+
+            foreach(RaycastedObject obj in raycastedObjects)
+            {
+                float dist = Vector3.Distance(obj.transform.position, transform.position);
+                if(dist < minDist)
+                {
+                    closestObject = obj;
+                    minDist = dist;
+                }
+            }
+
             float x = 0;
             float y = 0;
             float z = 0;
@@ -147,7 +155,7 @@ public class Player_Hand_Behaviour : MonoBehaviour
         }
         else
         {
-            transform.position = handParent.transform.position;
+            //transform.position = handParent.transform.position;
             this.gameObject.GetComponent<MeshRenderer>().material = unplaceableMat;
         }
 
