@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2863212489384232615
 Transform:
   m_ObjectHideFlags: 0
@@ -104,4 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abf9fc0e962a634791c01f8dcdb7ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unplaceableMat: {fileID: 0}
+  placeableMat: {fileID: 0}
   handParent: {fileID: 0}
