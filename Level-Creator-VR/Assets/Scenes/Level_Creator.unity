@@ -206,6 +206,16 @@ PrefabInstance:
       propertyPath: handParent
       value: 
       objectReference: {fileID: 2098184029}
+    - target: {fileID: 1492490081705142213, guid: 0219c046a5f81c54eafe175d32a25b26,
+        type: 3}
+      propertyPath: unplaceableMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b19d528f001f7f41877ce29bcc82e49, type: 2}
+    - target: {fileID: 1492490081705142213, guid: 0219c046a5f81c54eafe175d32a25b26,
+        type: 3}
+      propertyPath: placeableMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 687c512b0b20c0742814007014df3122, type: 2}
     m_RemovedComponents:
     - {fileID: 2863212489384232614, guid: 0219c046a5f81c54eafe175d32a25b26, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0219c046a5f81c54eafe175d32a25b26, type: 3}

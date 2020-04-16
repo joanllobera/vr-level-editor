@@ -5,6 +5,9 @@ using UnityEngine;
 public class Player_Hand_Behaviour : MonoBehaviour
 {
     enum Direction {Up, Down, Right, Left, Forward, Back};
+
+    public Material unplaceableMat;
+    public Material placeableMat;
     struct RaycastedObject
     {
         public Transform transform;
@@ -139,11 +142,13 @@ public class Player_Hand_Behaviour : MonoBehaviour
                     z = closestObject.transform.position.z + closestObject.transform.localScale.z;
                     break;
             }
+            this.gameObject.GetComponent<MeshRenderer>().material = placeableMat;
             transform.position = new Vector3(x, y, z);
         }
         else
         {
             transform.position = handParent.transform.position;
+            this.gameObject.GetComponent<MeshRenderer>().material = unplaceableMat;
         }
 
     }
