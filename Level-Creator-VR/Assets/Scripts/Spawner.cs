@@ -13,18 +13,21 @@ public class Spawner : MonoBehaviour
     public GameObject leftHand;
     public GameObject lightPrefab;
     public GameObject playerPrefab;
-    public GameObject cubeHand, lightHand, playerHand;
+    public GameObject cubeHand, lightHand, playerHand, checkpointHand, finishHand, axisRotatorHand;
     public GameObject testObject;
     public Material cubeMat;
     public Material deleteMat;
     public List<GameObject> selectionText = new List<GameObject>();
 
-    public bool cube, light, player;
+    public bool cube, light, player, checkpoint, finish, axisRotator;
+
+    private LevelLoader levelLoader;
 
     void Start()
     {
         delete = false;
         cube = true;
+        levelLoader = GetComponent<LevelLoader>();
     }
 
     // Update is called once per frame
@@ -35,18 +38,54 @@ public class Spawner : MonoBehaviour
             cubeHand.SetActive(true);
             lightHand.SetActive(false);
             playerHand.SetActive(false);
+            checkpointHand.SetActive(false);
+            finishHand.SetActive(false);
+            axisRotatorHand.SetActive(false);
         }
         else if (light)
         {
             cubeHand.SetActive(false);
             lightHand.SetActive(true);
             playerHand.SetActive(false);
+            checkpointHand.SetActive(false);
+            finishHand.SetActive(false);
+            axisRotatorHand.SetActive(false);
         }
         else if (player)
         {
             cubeHand.SetActive(false);
             lightHand.SetActive(false);
             playerHand.SetActive(true);
+            checkpointHand.SetActive(false);
+            finishHand.SetActive(false);
+            axisRotatorHand.SetActive(false);
+        }
+        else if (checkpoint) 
+        {
+            cubeHand.SetActive(false);
+            lightHand.SetActive(false);
+            playerHand.SetActive(false);
+            checkpointHand.SetActive(true);
+            finishHand.SetActive(false);
+            axisRotatorHand.SetActive(false);
+        }
+        else if (finish) 
+        {
+            cubeHand.SetActive(false);
+            lightHand.SetActive(false);
+            playerHand.SetActive(false);
+            checkpointHand.SetActive(false);
+            finishHand.SetActive(true);
+            axisRotatorHand.SetActive(false);
+        }
+        else if (axisRotator) 
+        {
+            cubeHand.SetActive(false);
+            lightHand.SetActive(false);
+            playerHand.SetActive(false);
+            checkpointHand.SetActive(false);
+            finishHand.SetActive(false);
+            axisRotatorHand.SetActive(true);
         }
 
 
@@ -150,6 +189,9 @@ public class Spawner : MonoBehaviour
                 cube = true;
                 light = false;
                 player = false;
+                checkpoint = false;
+                finish = false;
+                axisRotator = false;
             }
 
             if (hit.transform.tag == "activateLight")
@@ -165,6 +207,9 @@ public class Spawner : MonoBehaviour
                 cube = false;
                 light = true;
                 player = false;
+                checkpoint = false;
+                finish = false;
+                axisRotator = false;
             }
 
             if (hit.transform.tag == "activatePlayer")
@@ -179,9 +224,70 @@ public class Spawner : MonoBehaviour
             {
                 cube = false;
                 light = false;
+                checkpoint = false;
                 player = true;
+                axisRotator = false;
+                finish = false;
             }
 
+            // Checkpoint
+            if(hit.transform.tag == "activateCheckpoint") 
+            {
+                selectionText[4].GetComponent<Text>().color = Color.white;
+            }
+            else 
+            {
+                selectionText[4].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "activateCheckpoint" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                cube = false;
+                light = false;
+                player = false;
+                checkpoint = true;
+                finish = false;
+                axisRotator = false;
+            }
+
+            // Finish
+            if (hit.transform.tag == "activateFinish")
+            {
+                selectionText[5].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[5].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "activateFinish" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                cube = false;
+                light = false;
+                player = false;
+                checkpoint = false;
+                finish = true;
+                axisRotator = false;
+            }
+
+            // AxisRotator
+            if (hit.transform.tag == "activateAxisRotator")
+            {
+                selectionText[6].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[6].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "activateAxisRotator" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                cube = false;
+                light = false;
+                player = false;
+                checkpoint = false;
+                finish = false;
+                axisRotator = true;
+            }
+
+            // Undo
             if (hit.transform.tag == "undo")
             {
                 selectionText[3].GetComponent<Text>().color = Color.white;
@@ -189,6 +295,66 @@ public class Spawner : MonoBehaviour
             else
             {
                 selectionText[3].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "undo" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                
+            }
+
+            // Redo
+            if (hit.transform.tag == "undo")
+            {
+                selectionText[7].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[7].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "redo" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                
+            }
+
+            // Play
+            if (hit.transform.tag == "play")
+            {
+                selectionText[8].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[8].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "play" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                
+            }
+
+            // Load
+            if (hit.transform.tag == "load")
+            {
+                selectionText[10].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[10].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "load" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                //levelLoader.Load();
+            }
+
+            // Save
+            if (hit.transform.tag == "save")
+            {
+                selectionText[9].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[9].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "save" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                levelLoader.Save();
             }
         }
         

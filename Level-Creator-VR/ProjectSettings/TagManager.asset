@@ -14,6 +14,13 @@ TagManager:
   - activateLight
   - activatePlayer
   - undo
+  - activateCheckpoint
+  - activateFinish
+  - activateAxisRotator
+  - redo
+  - play
+  - save
+  - load
   layers:
   - Default
   - TransparentFX
