@@ -18,8 +18,7 @@ public class LevelLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        data.player = GameObject.Find("Player").transform;
-        data.light = GameObject.Find("Light").transform;
+    
     }
 
     public void Save() 
@@ -31,6 +30,8 @@ public class LevelLoader : MonoBehaviour
         {
             data.cubes.Add(c.transform);
         }
+        data.player = GameObject.Find("Player").transform;
+        data.light = GameObject.Find("Light").transform;
 
         // We save the data in the json
         string json = JsonUtility.ToJson(data);
