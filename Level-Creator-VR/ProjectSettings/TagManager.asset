@@ -21,6 +21,7 @@ TagManager:
   - play
   - save
   - load
+  - light
   layers:
   - Default
   - TransparentFX

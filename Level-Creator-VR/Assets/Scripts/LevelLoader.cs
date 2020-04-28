@@ -18,7 +18,7 @@ public class LevelLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    
+        Save();
     }
 
     public void Save() 
@@ -35,7 +35,13 @@ public class LevelLoader : MonoBehaviour
 
         // We save the data in the json
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.dataPath + "/save.txt", json);
+        int index = 0;
+        while (File.Exists(Application.dataPath + "/save" + index + ".txt")) 
+        {
+            index++;
+        }
+        
+        File.WriteAllText(Application.dataPath + "/save" + index + ".txt", json);
     }
 
     public void Load()
