@@ -28,11 +28,11 @@ public class Player_Hand_Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //new Vector3(Mathf.Round(handParent.position.x),
-                                         //Mathf.Round(handParent.position.y),
-                                         //Mathf.Round(handParent.position.z));
+        /*transform.position = new Vector3(Mathf.Round(handParent.position.x),
+                                         Mathf.Round(handParent.position.y),
+                                         Mathf.Round(handParent.position.z));
 
-        //transform.rotation = Quaternion.identity;
+        transform.rotation = Quaternion.identity;*/
 
         raycastedObjects = new List<RaycastedObject>();
         Debug.DrawRay(handParent.position, handParent.TransformDirection(Vector3.up) * 2, Color.red);

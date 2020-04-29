@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
     private bool spawnOnce;
     private bool deleteOnce;
     private bool delete;
+    private bool gualdal;
     public List<GameObject> spawnedObjects;
     public GameObject cubePrefab;
     public GameObject leftHand;
@@ -28,6 +29,7 @@ public class Spawner : MonoBehaviour
     {
         delete = false;
         cube = true;
+        gualdal = false;
         levelLoader = GetComponent<LevelLoader>();
         urManager = GetComponent<UndoRedoManager>();
     }
@@ -142,13 +144,12 @@ public class Spawner : MonoBehaviour
             deleteOnce = true;
             if(cube)
             {
-                foreach (GameObject cub in spawnedObjects)
+                for (int i = spawnedObjects.Count; i > 0; i--)
                 {
-                    if(cub.transform.position == cubeHand.transform.position)
+                    if(spawnedObjects[i].transform.position == cubeHand.transform.position)
                     {
-                        Destroy(cub);
-                        spawnedObjects.Remove(cub);
-                        
+                        spawnedObjects.Remove(spawnedObjects[i].gameObject);
+                        Destroy(spawnedObjects[i].gameObject);                                            
                     }
                 }
             }
@@ -354,9 +355,14 @@ public class Spawner : MonoBehaviour
             {
                 selectionText[9].GetComponent<Text>().color = Color.black;
             }
-            if (hit.transform.tag == "save" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            if (hit.transform.tag == "save" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f && !gualdal)
             {
+                gualdal = true;
                 levelLoader.Save();
+            }
+            else if (Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.2f)
+            {
+                gualdal = false;
             }
         }
         

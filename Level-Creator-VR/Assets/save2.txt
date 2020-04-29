@@ -1,0 +1,1 @@
+{"players":[],"lights":[],"cubes":[{"instanceID":-16768},{"instanceID":-16780},{"instanceID":-16794},{"instanceID":-16806},{"instanceID":-16818}]}
