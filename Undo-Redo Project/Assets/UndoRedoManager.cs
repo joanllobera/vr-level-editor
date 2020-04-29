@@ -5,13 +5,13 @@ using UnityEngine;
 public class UndoRedoManager : MonoBehaviour
 {
     //"Action" collections
-    List<Action> actionsDone;
-    Stack<Action> actionsUndo;
+    List<ModuleAction> actionsDone;
+    Stack<ModuleAction> actionsUndo;
 
     public UndoRedoManager()
     {
-        actionsDone = new List<Action>();
-        actionsUndo = new Stack<Action>();
+        actionsDone = new List<ModuleAction>();
+        actionsUndo = new Stack<ModuleAction>();
     }
 
     public void Undo()
@@ -31,7 +31,7 @@ public class UndoRedoManager : MonoBehaviour
     {
         if (actionsUndo.Count > 0)
         {
-            Action a = actionsUndo.Pop();
+            ModuleAction a = actionsUndo.Pop();
             a.RedoAction();
             actionsDone.Add(a);
         }
@@ -40,7 +40,7 @@ public class UndoRedoManager : MonoBehaviour
     //La llista objects es una llista que has de crer tu, que ha de tenir tots els objectes que instanties
     //Després de cada AddAction(a,objects) hi ha d'haver un Add() a la teva llista de objects
     //Aquest segon paràmetre es podria posar per esborrar els gameObjects de l'array que proablament tindrà l'usuari
-    public void AddAction(Action a/*,List<GameObject> objects*/)
+    public void AddAction(ModuleAction a/*,List<GameObject> objects*/)
     {
         DeleteRedoStack(/*objects*/);
         actionsDone.Add(a);
@@ -52,7 +52,7 @@ public class UndoRedoManager : MonoBehaviour
     {
         if (actionsUndo.Count > 0)
         {
-            foreach (Action a in actionsUndo)
+            foreach (ModuleAction a in actionsUndo)
             {
                 if (a.GetType() == typeof(ModuleCreate) || a.GetType() == typeof(ModuleErase))
                 {

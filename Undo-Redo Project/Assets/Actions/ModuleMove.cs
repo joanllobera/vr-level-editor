@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModuleMove : Action
+public class ModuleMove : ModuleAction
 {
     GameObject module;
 
