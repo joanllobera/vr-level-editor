@@ -22,12 +22,14 @@ public class Spawner : MonoBehaviour
     public bool cube, light, player, checkpoint, finish, axisRotator;
 
     private LevelLoader levelLoader;
+    private UndoRedoManager urManager;
 
     void Start()
     {
         delete = false;
         cube = true;
         levelLoader = GetComponent<LevelLoader>();
+        urManager = GetComponent<UndoRedoManager>();
     }
 
     // Update is called once per frame
@@ -298,7 +300,7 @@ public class Spawner : MonoBehaviour
             }
             if (hit.transform.tag == "undo" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
-                
+                urManager.Undo();
             }
 
             // Redo
@@ -312,7 +314,7 @@ public class Spawner : MonoBehaviour
             }
             if (hit.transform.tag == "redo" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
-                
+                urManager.Redo();
             }
 
             // Play
