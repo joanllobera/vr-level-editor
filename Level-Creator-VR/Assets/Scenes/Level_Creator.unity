@@ -306,8 +306,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 102.41, y: 21.9, z: 1}
-  m_Center: {x: -36.7, y: 5.9, z: 0}
+  m_Size: {x: 74.1, y: 21.9, z: 1}
+  m_Center: {x: -51.6, y: 5.9, z: 0}
 --- !u!222 &94157764
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -657,8 +657,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 102.41, y: 21.9, z: 1}
-  m_Center: {x: -36.7, y: 5.9, z: 0}
+  m_Size: {x: 150.7, y: 21.9, z: 1}
+  m_Center: {x: -14.7, y: 5.9, z: 0}
 --- !u!222 &279028053
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1177,7 +1177,7 @@ PrefabInstance:
     - target: {fileID: 3170981622269482124, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 143
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 3170981622269482124, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
         type: 3}
@@ -1187,7 +1187,7 @@ PrefabInstance:
     - target: {fileID: 3170981621796444748, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 82
+      value: 73
       objectReference: {fileID: 0}
     - target: {fileID: 3170981621796444748, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
         type: 3}
@@ -1262,7 +1262,7 @@ PrefabInstance:
     - target: {fileID: 3170981622321540700, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -53.6
+      value: -52.5
       objectReference: {fileID: 0}
     - target: {fileID: 3170981622321540700, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
         type: 3}
@@ -1282,12 +1282,17 @@ PrefabInstance:
     - target: {fileID: 3170981621796444751, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
         type: 3}
       propertyPath: m_Center.y
-      value: 5.9
+      value: 6.55
       objectReference: {fileID: 0}
     - target: {fileID: 3170981621796444751, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
         type: 3}
       propertyPath: m_Size.x
-      value: 102.41
+      value: 145.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170981621796444751, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -23.86
       objectReference: {fileID: 0}
     - target: {fileID: 3170981621796444749, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
         type: 3}
@@ -1603,7 +1608,7 @@ PrefabInstance:
     - target: {fileID: 3170981622523106218, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -23.2
+      value: -24.1
       objectReference: {fileID: 0}
     - target: {fileID: 3170981622523106218, guid: 0ed87696e50e4a44da8c516eab4ecf1d,
         type: 3}
