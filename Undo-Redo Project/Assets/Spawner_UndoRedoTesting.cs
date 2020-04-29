@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Spawner : MonoBehaviour
+public class Spawner_UndoRedoTesting : MonoBehaviour
 {
     public GameObject cubePrefab;
     public GameObject cubeHand;
@@ -11,13 +11,13 @@ public class Spawner : MonoBehaviour
     public List<GameObject> objectsSpawned;
 
     //"Action" collections
-    List<Action> actionsDone;
-    Stack<Action> actionsUndo;
+    List<ModuleAction> actionsDone;
+    Stack<ModuleAction> actionsUndo;
 
     void Start()
     {
-        actionsDone = new List<Action>();
-        actionsUndo = new Stack<Action>();
+        actionsDone = new List<ModuleAction>();
+        actionsUndo = new Stack<ModuleAction>();
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class Spawner : MonoBehaviour
         {
             if (actionsUndo.Count > 0)
             {
-                Action a = actionsUndo.Pop();
+                ModuleAction a = actionsUndo.Pop();
                 a.RedoAction();
                 actionsDone.Add(a);
             }
@@ -111,7 +111,7 @@ public class Spawner : MonoBehaviour
     {
         if (actionsUndo.Count > 0)
         {
-            foreach (Action a in actionsUndo)
+            foreach (ModuleAction a in actionsUndo)
             {
                 if (a.GetType() == typeof(ModuleCreate) || a.GetType() == typeof(ModuleErase))
                 {
