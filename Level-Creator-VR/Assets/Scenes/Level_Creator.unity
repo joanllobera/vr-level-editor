@@ -386,7 +386,7 @@ PrefabInstance:
     - target: {fileID: 2863212489384232611, guid: 4385bbaf6d8d75c4baa1597326b5935d,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: light
       objectReference: {fileID: 0}
     - target: {fileID: 2863212489384232611, guid: 4385bbaf6d8d75c4baa1597326b5935d,
         type: 3}
@@ -903,6 +903,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 467876511120016118, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_Name
+      value: DirLight_Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 467876511120016117, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_Button
+      objectReference: {fileID: 0}
     - target: {fileID: 467876511120016122, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1007,16 +1017,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 467876511120016117, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
-        type: 3}
-      propertyPath: m_Name
-      value: Player_Button
-      objectReference: {fileID: 0}
-    - target: {fileID: 467876511120016118, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
-        type: 3}
-      propertyPath: m_Name
-      value: DirLight_Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e, type: 3}

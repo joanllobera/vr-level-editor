@@ -9,8 +9,8 @@ public class LevelLoader : MonoBehaviour
     [Serializable]
     public class LevelData 
     {
-        public Transform player;
-        public Transform light;
+        public List<Transform> players = new List<Transform>();
+        public List<Transform> lights = new List<Transform>();
         public List<Transform> cubes = new List<Transform>();
     }
     LevelData data = new LevelData();
@@ -18,20 +18,36 @@ public class LevelLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Save();
+
     }
 
     public void Save() 
     {
         // We save the cube's transform
         data.cubes.Clear();
+        data.players.Clear();
+        data.lights.Clear();
+
+        // Cubes
         GameObject[] cubes = GameObject.FindGameObjectsWithTag("cube");
         foreach(GameObject c in cubes)
         {
             data.cubes.Add(c.transform);
         }
-        data.player = GameObject.Find("Player").transform;
-        data.light = GameObject.Find("Light").transform;
+
+        // Lights
+        GameObject[] lights = GameObject.FindGameObjectsWithTag("light");
+        foreach (GameObject l in lights)
+        {
+            data.lights.Add(l.transform);
+        }
+
+        // Players
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject p in players)
+        {
+            data.players.Add(p.transform);
+        }
 
         // We save the data in the json
         string json = JsonUtility.ToJson(data);
@@ -46,30 +62,41 @@ public class LevelLoader : MonoBehaviour
 
     public void Load()
     {
-        if (File.Exists(Application.dataPath + "/save.txt"))
-        {
-            string json = File.ReadAllText(Application.dataPath + "/save.txt");
-            data = JsonUtility.FromJson<LevelData>(json);
+        //if (File.Exists(Application.dataPath + "/save.txt"))
+        //{
+        //    string json = File.ReadAllText(Application.dataPath + "/save.txt");
+        //    data = JsonUtility.FromJson<LevelData>(json);
 
-            GameObject player = GameObject.Find("Player");
-            player.transform.SetPositionAndRotation(data.player.position, data.player.rotation);
-            player.transform.localScale = data.player.localScale;
+        //    // Lights
+        //    foreach (Transform c in data.lights)
+        //    {
+        //        // We spawn the cubes
+        //        GameObject g = (GameObject)Instantiate(Resources.Load("Light"));
+        //        g.transform.SetPositionAndRotation(c.position, c.rotation);
+        //        g.transform.localScale = c.localScale;
+        //    }
 
-            GameObject light = GameObject.Find("Light");
-            light.transform.SetPositionAndRotation(data.light.position, data.light.rotation);
-            light.transform.localScale = data.player.localScale;
+        //    // Player
+        //    foreach (Transform c in data.players)
+        //    {
+        //        // We spawn the cubes
+        //        GameObject g = (GameObject)Instantiate(Resources.Load("Player"));
+        //        g.transform.SetPositionAndRotation(c.position, c.rotation);
+        //        g.transform.localScale = c.localScale;
+        //    }
 
-            foreach (Transform c in data.cubes)
-            {
-                // We spawn the cubes
-                GameObject g = (GameObject)Instantiate(Resources.Load("Cube"));
-                g.transform.SetPositionAndRotation(c.position, c.rotation);
-                g.transform.localScale = c.localScale;
-            }
-        }
-        else
-        {
-            Debug.Log("Could not load from file.");
-        }
+        //    // Cubes
+        //    foreach (Transform c in data.cubes)
+        //    {
+        //        // We spawn the cubes
+        //        GameObject g = (GameObject)Instantiate(Resources.Load("Cube"));
+        //        g.transform.SetPositionAndRotation(c.position, c.rotation);
+        //        g.transform.localScale = c.localScale;
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.Log("Could not load from file.");
+        //}
     }
 }
