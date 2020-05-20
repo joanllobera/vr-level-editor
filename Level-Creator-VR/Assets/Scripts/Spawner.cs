@@ -102,8 +102,7 @@ public class Spawner : MonoBehaviour
 
         if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") > 0.3f && !spawnOnce)
         {
-           
-
+          
             if(cube)
             {
                 if(delete)
@@ -112,11 +111,14 @@ public class Spawner : MonoBehaviour
                     {
                         if (cub.transform.position == cubeHand.transform.position)
                         {
+                            cub.SetActive(false);
+                            urManager.AddAction(new ModuleErase(cub));
+                            /*
                             Destroy(cub);
                             if (cub.gameObject.tag != "player")
                             {
                                 spawnedObjects.Remove(cub);
-                            }
+                            }*/
                         }
                     }
                 }
@@ -171,9 +173,11 @@ public class Spawner : MonoBehaviour
 
                         if(hitCount < 3)
                         {
-                            spawnedObjects.Add(Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation));
+                            GameObject g = Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation);
+                            spawnedObjects.Add(g);
                             spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
                             timeToSpawn = timeToSpawnInit; //reseteamos la cadencia
+                            urManager.AddAction(new ModuleCreate(g));
                         }
                         
                     }
@@ -186,14 +190,17 @@ public class Spawner : MonoBehaviour
             }
             else if(light)
             {
-                spawnedObjects.Add(Instantiate(lightPrefab, lightHand.transform.position, lightHand.transform.rotation));
+                GameObject g = Instantiate(lightPrefab, lightHand.transform.position, lightHand.transform.rotation);
+                spawnedObjects.Add(g);
                 spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
-                 spawnOnce = true; 
+                 spawnOnce = true;
+                urManager.AddAction(new ModuleCreate(g));
             }
             else if(player && !hasPlayer)
             {
-                var playerObject = Instantiate(playerPrefab, playerHand.transform.position, playerHand.transform.rotation);
+                GameObject playerObject = Instantiate(playerPrefab, playerHand.transform.position, playerHand.transform.rotation);
                 spawnedObjects.Add(playerObject);
+                urManager.AddAction(new ModuleCreate(playerObject));
                 playerObj = playerObject;
                 hasPlayer = true;
                 spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
@@ -221,8 +228,10 @@ public class Spawner : MonoBehaviour
                 {
                     if(spawnedObjects[i].transform.position == cubeHand.transform.position)
                     {
-                        spawnedObjects.Remove(spawnedObjects[i].gameObject);
-                        Destroy(spawnedObjects[i].gameObject);                                            
+                        spawnedObjects[i].gameObject.SetActive(false);
+                        urManager.AddAction(new ModuleErase(spawnedObjects[i].gameObject));
+                        /*spawnedObjects.Remove(spawnedObjects[i].gameObject);
+                        Destroy(spawnedObjects[i].gameObject);   */                                         
                     }
                 }
             }
