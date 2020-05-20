@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     private bool spawnOnce;
     private bool deleteOnce;
     private bool delete;
-    private bool gualdal;
+    public bool gualdal;
     public List<GameObject> spawnedObjects;
     public GameObject cubePrefab;
     public GameObject leftHand;
@@ -24,8 +24,8 @@ public class Spawner : MonoBehaviour
     float timeToSpawnInit;
     public bool cube, light, player, checkpoint, finish, axisRotator;
 
-    private LevelLoader levelLoader;
-    private UndoRedoManager urManager;
+    public LevelLoader levelLoader;
+    public UndoRedoManager urManager;
 
     void Start()
     {
