@@ -370,7 +370,7 @@ public class Spawner : MonoBehaviour
             }
 
             // Redo
-            if (hit.transform.tag == "undo")
+            if (hit.transform.tag == "redo")
             {
                 selectionText[7].GetComponent<Text>().color = Color.white;
             }

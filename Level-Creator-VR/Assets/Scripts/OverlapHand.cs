@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OverlapHand : MonoBehaviour
 {
@@ -14,7 +15,12 @@ public class OverlapHand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        GameObject parent = GameObject.Find("hands:b_r_index_ignore");
+        if(parent != null)
+        {
+            transform.parent = parent.transform;
+            transform.localPosition = new Vector3(0.01f, 0.01f, -0.04f);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,6 +33,18 @@ public class OverlapHand : MonoBehaviour
             spawner.checkpoint = false;
             spawner.finish = false;
             spawner.axisRotator = false;
+            spawner.selectionText[0].GetComponent<Text>().color = Color.white;
+            spawner.selectionText[1].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[2].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[3].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[4].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[5].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[6].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[7].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[8].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[9].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+
         }
         if(other.transform.CompareTag("activateLight"))
         {
@@ -36,6 +54,17 @@ public class OverlapHand : MonoBehaviour
             spawner.checkpoint = false;
             spawner.finish = false;
             spawner.axisRotator = false;
+            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[1].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[2].GetComponent<Text>().color = Color.white;
+            spawner.selectionText[3].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[4].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[5].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[6].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[7].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[8].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[9].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
         }
         if(other.transform.CompareTag("activatePlayer"))
         {
@@ -45,6 +74,17 @@ public class OverlapHand : MonoBehaviour
             spawner.player = true;
             spawner.axisRotator = false;
             spawner.finish = false;
+            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[1].GetComponent<Text>().color = Color.white;
+            spawner.selectionText[2].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[3].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[4].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[5].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[6].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[7].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[9].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[8].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
         }
         if(other.transform.CompareTag("activateCheckpoint"))
         {
@@ -54,6 +94,18 @@ public class OverlapHand : MonoBehaviour
             spawner.checkpoint = true;
             spawner.finish = false;
             spawner.axisRotator = false;
+            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[1].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[2].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[3].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[4].GetComponent<Text>().color = Color.white;
+            spawner.selectionText[5].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[6].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[7].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[8].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[9].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            
         }
         if(other.transform.CompareTag("activateFinish"))
         {
@@ -63,6 +115,17 @@ public class OverlapHand : MonoBehaviour
             spawner.checkpoint = false;
             spawner.finish = true;
             spawner.axisRotator = false;
+            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[1].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[2].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[3].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[4].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[5].GetComponent<Text>().color = Color.white;
+            spawner.selectionText[6].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[7].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[8].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[9].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
         }
         if(other.transform.CompareTag("activateAxisRotator"))
         {
@@ -72,21 +135,91 @@ public class OverlapHand : MonoBehaviour
             spawner.checkpoint = false;
             spawner.finish = false;
             spawner.axisRotator = true;
+            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[1].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[2].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[3].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[4].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[5].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[6].GetComponent<Text>().color = Color.white;
+            spawner.selectionText[7].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[8].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[9].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
         }
         if(other.transform.CompareTag("undo"))
         {
+            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[1].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[2].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[3].GetComponent<Text>().color = Color.white;
+            spawner.selectionText[4].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[5].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[6].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[7].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[8].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[9].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
             spawner.urManager.Undo();
+        }
+        if(other.transform.CompareTag("redo"))
+        {
+            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[1].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[2].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[3].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[4].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[5].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[6].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[7].GetComponent<Text>().color = Color.white;
+            spawner.selectionText[8].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[9].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            spawner.urManager.Redo();
         }
         if(other.transform.CompareTag("play"))
         {
-            
+            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[1].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[2].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[3].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[4].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[5].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[6].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[7].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[8].GetComponent<Text>().color = Color.white;
+            spawner.selectionText[9].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            //PLAY
         }
         if(other.transform.CompareTag("load"))
         {
+            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[1].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[2].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[3].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[4].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[5].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[6].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[7].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[8].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[9].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.white;
             spawner.levelLoader.OpenLoadCanvas();
         }
         if(other.transform.CompareTag("save"))
         {
+            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[1].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[2].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[3].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[4].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[5].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[6].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[7].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[8].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[9].GetComponent<Text>().color = Color.white;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
             spawner.gualdal = true;
             spawner.levelLoader.OpenSaveCanvas();
         }
