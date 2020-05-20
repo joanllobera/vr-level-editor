@@ -28,6 +28,7 @@ TagManager:
   - saveSlot
   - loadSlot
   - User
+  - RemovePlayer
   layers:
   - Default
   - TransparentFX

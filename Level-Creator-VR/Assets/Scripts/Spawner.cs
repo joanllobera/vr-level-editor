@@ -9,6 +9,8 @@ public class Spawner : MonoBehaviour
     private bool deleteOnce;
     private bool delete;
     public bool gualdal;
+    private bool hasPlayer;
+    private GameObject playerObj;
     public List<GameObject> spawnedObjects;
     public GameObject cubePrefab;
     public GameObject leftHand;
@@ -111,7 +113,10 @@ public class Spawner : MonoBehaviour
                         if (cub.transform.position == cubeHand.transform.position)
                         {
                             Destroy(cub);
-                            spawnedObjects.Remove(cub);
+                            if (cub.gameObject.tag != "player")
+                            {
+                                spawnedObjects.Remove(cub);
+                            }
                         }
                     }
                 }
@@ -185,9 +190,12 @@ public class Spawner : MonoBehaviour
                 spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
                  spawnOnce = true; 
             }
-            else if(player)
+            else if(player && !hasPlayer)
             {
-                spawnedObjects.Add(Instantiate(playerPrefab, playerHand.transform.position, playerHand.transform.rotation));
+                var playerObject = Instantiate(playerPrefab, playerHand.transform.position, playerHand.transform.rotation);
+                spawnedObjects.Add(playerObject);
+                playerObj = playerObject;
+                hasPlayer = true;
                 spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
                 spawnOnce = true;
             }
@@ -394,7 +402,28 @@ public class Spawner : MonoBehaviour
             }
             if (hit.transform.tag == "play" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
-                
+                if(hasPlayer)
+                {
+                    playerObj.GetComponent<Movement>().Activate();
+                }
+            }
+
+            // Remove Player
+            if (hit.transform.tag == "RemovePlayer")
+            {
+                selectionText[11].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[11].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "RemovePlayer" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                if (hasPlayer)
+                {
+                    Destroy(playerObj);
+                    hasPlayer = false;
+                }
             }
 
             // Load
