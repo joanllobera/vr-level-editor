@@ -453,11 +453,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: prefab-gap-past
       objectReference: {fileID: 0}
-    - target: {fileID: 5572621575605311944, guid: fec101a29f2d6e54cbbebccf636302f1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 5572621575605311923, guid: fec101a29f2d6e54cbbebccf636302f1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -645,11 +640,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: prefab-gap-present
       objectReference: {fileID: 0}
-    - target: {fileID: 5572621575605311944, guid: 9f97abea14ecba645a124bc2ed641e86,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 5572621575605311923, guid: 9f97abea14ecba645a124bc2ed641e86,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -710,11 +700,6 @@ PrefabInstance:
       propertyPath: lightSource
       value: 
       objectReference: {fileID: 968567032}
-    - target: {fileID: 5572621575605311927, guid: 9f97abea14ecba645a124bc2ed641e86,
-        type: 3}
-      propertyPath: worksOnlyInShadow
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f97abea14ecba645a124bc2ed641e86, type: 3}
 --- !u!1 &1793761650
