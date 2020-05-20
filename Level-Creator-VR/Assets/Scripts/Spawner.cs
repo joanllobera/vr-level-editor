@@ -156,7 +156,7 @@ public class Spawner : MonoBehaviour
                                 hitCount++;
                             }
                         }
-                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.right), out hit, 1.5f)) 
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.right), out hit, 1.5f))
                         {
                             if(hit.transform.tag == "cube")
                             {
