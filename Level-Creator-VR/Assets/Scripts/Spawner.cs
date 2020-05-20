@@ -112,7 +112,7 @@ public class Spawner : MonoBehaviour
                         if (cub.transform.position == cubeHand.transform.position)
                         {
                             cub.SetActive(false);
-                            urManager.AddAction(new ModuleErase(cub));
+                            urManager.AddAction(new ModuleErase(cub), spawnedObjects);
                             /*
                             Destroy(cub);
                             if (cub.gameObject.tag != "player")
@@ -177,7 +177,7 @@ public class Spawner : MonoBehaviour
                             spawnedObjects.Add(g);
                             spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
                             timeToSpawn = timeToSpawnInit; //reseteamos la cadencia
-                            urManager.AddAction(new ModuleCreate(g));
+                            urManager.AddAction(new ModuleCreate(g), spawnedObjects);
                         }
                         
                     }
@@ -194,13 +194,13 @@ public class Spawner : MonoBehaviour
                 spawnedObjects.Add(g);
                 spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
                  spawnOnce = true;
-                urManager.AddAction(new ModuleCreate(g));
+                urManager.AddAction(new ModuleCreate(g), spawnedObjects);
             }
             else if(player && !hasPlayer)
             {
                 GameObject playerObject = Instantiate(playerPrefab, playerHand.transform.position, playerHand.transform.rotation);
                 spawnedObjects.Add(playerObject);
-                urManager.AddAction(new ModuleCreate(playerObject));
+                urManager.AddAction(new ModuleCreate(playerObject), spawnedObjects);
                 playerObj = playerObject;
                 hasPlayer = true;
                 spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
@@ -229,7 +229,7 @@ public class Spawner : MonoBehaviour
                     if(spawnedObjects[i].transform.position == cubeHand.transform.position)
                     {
                         spawnedObjects[i].gameObject.SetActive(false);
-                        urManager.AddAction(new ModuleErase(spawnedObjects[i].gameObject));
+                        urManager.AddAction(new ModuleErase(spawnedObjects[i].gameObject), spawnedObjects);
                         /*spawnedObjects.Remove(spawnedObjects[i].gameObject);
                         Destroy(spawnedObjects[i].gameObject);   */                                         
                     }
