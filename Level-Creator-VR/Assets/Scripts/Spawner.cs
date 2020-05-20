@@ -106,16 +106,12 @@ public class Spawner : MonoBehaviour
             {
                 if(delete)
                 {
-                    if (cube)
+                    foreach (GameObject cub in spawnedObjects)
                     {
-                        foreach (GameObject cub in spawnedObjects)
+                        if (cub.transform.position == cubeHand.transform.position)
                         {
-                            if (cub.transform.position == cubeHand.transform.position)
-                            {
-                                Destroy(cub);
-                                spawnedObjects.Remove(cub);
-
-                            }
+                            Destroy(cub);
+                            spawnedObjects.Remove(cub);
                         }
                     }
                 }
@@ -123,9 +119,58 @@ public class Spawner : MonoBehaviour
                 {
                     if(timeToSpawn <= 0.0f)
                     {
-                        spawnedObjects.Add(Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation));
-                        spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
-                        timeToSpawn = timeToSpawnInit; //reseteamos la cadencia
+                        byte hitCount = 0;
+                        RaycastHit hit;
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.forward), out hit, 1.5f))
+                        {
+                            if(hit.transform.tag == "cube")
+                            {
+                                hitCount++;
+                            }
+                        }
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.back), out hit, 1.5f))
+                        {
+                            if(hit.transform.tag == "cube")
+                            {
+                                hitCount++;
+                            }
+                        }
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.up), out hit, 1.5f))
+                        {
+                            if(hit.transform.tag == "cube")
+                            {
+                                hitCount++;
+                            }
+                        }
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.down), out hit, 1.5f))
+                        {
+                            if(hit.transform.tag == "cube")
+                            {
+                                hitCount++;
+                            }
+                        }
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.left), out hit, 1.5f))
+                        {
+                            if(hit.transform.tag == "cube")
+                            {
+                                hitCount++;
+                            }
+                        }
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.right), out hit, 1.5f))
+                        {
+                            if(hit.transform.tag == "cube")
+                            {
+                                hitCount++;
+                            }
+                        }
+
+                        if(hitCount < 3)
+                        {
+                            spawnedObjects.Add(Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation));
+                            spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
+                            timeToSpawn = timeToSpawnInit; //reseteamos la cadencia
+                        }
+                        
                     }
                     else
                     {
