@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5572621575605311925}
   - component: {fileID: 5572621575605311926}
   - component: {fileID: 5572621575605311927}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: prefab-gap-present
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,4 +105,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightSource: {fileID: 0}
-  worksOnlyInShadow: 0
+  worksOnlyInShadow: 1

@@ -45,7 +45,7 @@ public class OverlapCheck : MonoBehaviour
 
         //Raycasting to check if its overlapped by another object
         RaycastHit hit;
-        if (Physics.Raycast(pointA, dirA, out hit, dirA.magnitude, layerMask))
+        if (Physics.Raycast(pointA, dirA, out hit, dirA.magnitude))
         {
             Debug.DrawRay(pointA, dirA, Color.red);
             collideA = true;
