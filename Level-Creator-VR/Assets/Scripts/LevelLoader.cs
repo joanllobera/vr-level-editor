@@ -15,13 +15,44 @@ public class LevelLoader : MonoBehaviour
     }
     LevelData data = new LevelData();
 
+    GameObject leftHand;
+    GameObject loadCanvas, saveCanvas;
+    GameObject mainMenu;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        loadCanvas = GameObject.FindGameObjectWithTag("loadCanvas");
+        saveCanvas = GameObject.FindGameObjectWithTag("saveCanvas");
+        mainMenu = GameObject.Find("MainMenu");
+        leftHand = GameObject.Find("LeftControllerAnchor");
+        loadCanvas.SetActive(false);
+        saveCanvas.SetActive(false);
     }
 
-    public void Save() 
+    void LateUpdate()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(leftHand.transform.position, leftHand.transform.forward, out hit, 30))
+        {
+            if (hit.transform.tag == "backButton") 
+            {
+                Back();
+            }
+            if(hit.transform.tag == "saveSlot") 
+            {
+                SaveSlot ss = hit.transform.gameObject.GetComponent<SaveSlot>();
+                Save(ss.slotNum);
+            }
+            if(hit.transform.tag == "loadSlot") 
+            {
+                LoadSlot ls = hit.transform.gameObject.GetComponent<LoadSlot>();
+                LoadSave(Application.dataPath + "/save" + ls.slotNum + ".txt");
+            }
+        }
+    }
+
+    public void Save(int n) 
     {
         // We save the cube's transform
         data.cubes.Clear();
@@ -50,53 +81,69 @@ public class LevelLoader : MonoBehaviour
         }
 
         // We save the data in the json
-        string json = JsonUtility.ToJson(data);
-        int index = 0;
-        while (File.Exists(Application.dataPath + "/save" + index + ".txt")) 
-        {
-            index++;
-        }
-        
-        File.WriteAllText(Application.dataPath + "/save" + index + ".txt", json);
+        string json = JsonUtility.ToJson(data);        
+        File.WriteAllText(Application.dataPath + "/save" + n + ".txt", json);
     }
 
-    public void Load()
+    public void OpenLoadCanvas()
     {
-        //if (File.Exists(Application.dataPath + "/save.txt"))
-        //{
-        //    string json = File.ReadAllText(Application.dataPath + "/save.txt");
-        //    data = JsonUtility.FromJson<LevelData>(json);
+        loadCanvas.SetActive(true);
+        mainMenu.SetActive(false);
 
-        //    // Lights
-        //    foreach (Transform c in data.lights)
-        //    {
-        //        // We spawn the cubes
-        //        GameObject g = (GameObject)Instantiate(Resources.Load("Light"));
-        //        g.transform.SetPositionAndRotation(c.position, c.rotation);
-        //        g.transform.localScale = c.localScale;
-        //    }
+        //// We load the saves' names.
+        //string[] files = System.IO.Directory.GetFiles(Application.dataPath, "*.txt");
+    }
 
-        //    // Player
-        //    foreach (Transform c in data.players)
-        //    {
-        //        // We spawn the cubes
-        //        GameObject g = (GameObject)Instantiate(Resources.Load("Player"));
-        //        g.transform.SetPositionAndRotation(c.position, c.rotation);
-        //        g.transform.localScale = c.localScale;
-        //    }
+    public void OpenSaveCanvas() 
+    {
+        saveCanvas.SetActive(true);
+        mainMenu.SetActive(false);
+    }
 
-        //    // Cubes
-        //    foreach (Transform c in data.cubes)
-        //    {
-        //        // We spawn the cubes
-        //        GameObject g = (GameObject)Instantiate(Resources.Load("Cube"));
-        //        g.transform.SetPositionAndRotation(c.position, c.rotation);
-        //        g.transform.localScale = c.localScale;
-        //    }
-        //}
-        //else
-        //{
-        //    Debug.Log("Could not load from file.");
-        //}
+    public void Back() 
+    {
+        loadCanvas.SetActive(false);
+        saveCanvas.SetActive(false);
+        mainMenu.SetActive(true);
+    }
+
+    public void LoadSave(string name) 
+    {
+        if (File.Exists(name))
+        {
+            string json = File.ReadAllText(name);
+            data = JsonUtility.FromJson<LevelData>(json);
+
+            // Lights
+            foreach (Transform c in data.lights)
+            {
+                // We spawn the cubes
+                GameObject g = (GameObject)Instantiate(Resources.Load("Light"));
+                g.transform.SetPositionAndRotation(c.position, c.rotation);
+                g.transform.localScale = c.localScale;
+            }
+
+            // Player
+            foreach (Transform c in data.players)
+            {
+                // We spawn the cubes
+                GameObject g = (GameObject)Instantiate(Resources.Load("Player"));
+                g.transform.SetPositionAndRotation(c.position, c.rotation);
+                g.transform.localScale = c.localScale;
+            }
+
+            // Cubes
+            foreach (Transform c in data.cubes)
+            {
+                // We spawn the cubes
+                GameObject g = (GameObject)Instantiate(Resources.Load("Cube"));
+                g.transform.SetPositionAndRotation(c.position, c.rotation);
+                g.transform.localScale = c.localScale;
+            }
+        }
+        else
+        {
+            Debug.Log("Could not load from file.");
+        }
     }
 }

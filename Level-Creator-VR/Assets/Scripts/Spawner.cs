@@ -408,7 +408,7 @@ public class Spawner : MonoBehaviour
             }
             if (hit.transform.tag == "load" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
-                //levelLoader.Load();
+                levelLoader.OpenLoadCanvas();
             }
 
             // Save
@@ -423,7 +423,7 @@ public class Spawner : MonoBehaviour
             if (hit.transform.tag == "save" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f && !gualdal)
             {
                 gualdal = true;
-                levelLoader.Save();
+                levelLoader.OpenSaveCanvas();
             }
             else if (Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.2f)
             {

@@ -22,6 +22,11 @@ TagManager:
   - save
   - load
   - light
+  - loadCanvas
+  - saveCanvas
+  - backButton
+  - saveSlot
+  - loadSlot
   layers:
   - Default
   - TransparentFX

@@ -934,16 +934,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 467876511120016118, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
-        type: 3}
-      propertyPath: m_Name
-      value: DirLight_Button
-      objectReference: {fileID: 0}
-    - target: {fileID: 467876511120016117, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
-        type: 3}
-      propertyPath: m_Name
-      value: Player_Button
-      objectReference: {fileID: 0}
     - target: {fileID: 467876511120016122, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
         type: 3}
       propertyPath: m_LocalPosition.x
