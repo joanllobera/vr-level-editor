@@ -212,7 +212,7 @@ MonoBehaviour:
   Npc: {fileID: 0}
   zRot: 0
   changePlane: 0
-  alive: 1
+  alive: 0
 --- !u!54 &4414461778605576748
 Rigidbody:
   m_ObjectHideFlags: 0

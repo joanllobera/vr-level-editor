@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     private bool activateRaycasts = true;
     [HideInInspector] public float zRot;
     public bool changePlane = false;
-    [HideInInspector] public bool alive = true;
+    public bool alive = false;
     private Vector3 initialPos;
     private Quaternion initialRot;
     LayerMask mask;
@@ -153,4 +153,8 @@ public class Movement : MonoBehaviour
         transform.rotation = initialRot;
     }
 
+    public void Activate()
+    {
+        alive = true;
+    }
 }
