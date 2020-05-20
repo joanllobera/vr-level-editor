@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,15 +40,15 @@ public class UndoRedoManager : MonoBehaviour
     //La llista objects es una llista que has de crer tu, que ha de tenir tots els objectes que instanties
     //Després de cada AddAction(a,objects) hi ha d'haver un Add() a la teva llista de objects
     //Aquest segon paràmetre es podria posar per esborrar els gameObjects de l'array que proablament tindrà l'usuari
-    public void AddAction(ModuleAction a/*,List<GameObject> objects*/)
+    public void AddAction(ModuleAction a,List<GameObject> objects)
     {
-        DeleteRedoStack(/*objects*/);
+        DeleteRedoStack(objects);
         actionsDone.Add(a);
     }
 
     //This function is called when we do an action to delete the previous stack of actions.
     //We want to delete it to put new redo actions to the stack
-    void DeleteRedoStack(/*List<GameObject> objects*/)
+    void DeleteRedoStack(List<GameObject> objects)
     {
         if (actionsUndo.Count > 0)
         {
@@ -57,7 +57,7 @@ public class UndoRedoManager : MonoBehaviour
                 if (a.GetType() == typeof(ModuleCreate) || a.GetType() == typeof(ModuleErase))
                 {
                     a.DestroyModule();
-                    //objects.Remove(a.GetModule());
+                    objects.Remove(a.GetModule());
                 }
             }
 
