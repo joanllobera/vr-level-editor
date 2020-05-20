@@ -20,6 +20,8 @@ public class Spawner : MonoBehaviour
     public Material deleteMat;
     public List<GameObject> selectionText = new List<GameObject>();
 
+    public float timeToSpawn;
+    float timeToSpawnInit;
     public bool cube, light, player, checkpoint, finish, axisRotator;
 
     private LevelLoader levelLoader;
@@ -32,6 +34,9 @@ public class Spawner : MonoBehaviour
         gualdal = false;
         levelLoader = GetComponent<LevelLoader>();
         urManager = GetComponent<UndoRedoManager>();
+
+        timeToSpawnInit = timeToSpawn;
+        timeToSpawn= 0.0f;
     }
 
     // Update is called once per frame
@@ -95,7 +100,7 @@ public class Spawner : MonoBehaviour
 
         if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") > 0.3f && !spawnOnce)
         {
-            spawnOnce = true;
+           
 
             if(cube)
             {
@@ -116,26 +121,41 @@ public class Spawner : MonoBehaviour
                 }
                 else
                 {
-                    spawnedObjects.Add(Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation));
-                    spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
+                    if(timeToSpawn <= 0.0f)
+                    {
+                        spawnedObjects.Add(Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation));
+                        spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
+                        timeToSpawn = timeToSpawnInit; //reseteamos la cadencia
+                    }
+                    else
+                    {
+                        timeToSpawn -= Time.deltaTime;
+                    }
+                  
                 }
             }
             else if(light)
             {
                 spawnedObjects.Add(Instantiate(lightPrefab, lightHand.transform.position, lightHand.transform.rotation));
                 spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
+                 spawnOnce = true; 
             }
             else if(player)
             {
                 spawnedObjects.Add(Instantiate(playerPrefab, playerHand.transform.position, playerHand.transform.rotation));
                 spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
+                spawnOnce = true;
             }
 
         }
         else
         {
             if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") < 0.3f)
+            {
                 spawnOnce = false;
+                timeToSpawn = 0.0f;
+            }
+                
         }
         if (Input.GetAxis("Oculus_CrossPlatform_SecondaryHandTrigger") > 0.3f/*& !deleteOnce*/)
         {

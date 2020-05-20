@@ -426,7 +426,7 @@ PrefabInstance:
     - target: {fileID: 2863212489384232615, guid: 4385bbaf6d8d75c4baa1597326b5935d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.558
       objectReference: {fileID: 0}
     - target: {fileID: 2863212489384232615, guid: 4385bbaf6d8d75c4baa1597326b5935d,
         type: 3}
@@ -486,7 +486,7 @@ PrefabInstance:
     - target: {fileID: 2863212489384232609, guid: 4385bbaf6d8d75c4baa1597326b5935d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4385bbaf6d8d75c4baa1597326b5935d, type: 3}
@@ -603,6 +603,7 @@ MonoBehaviour:
   - {fileID: 168049498}
   - {fileID: 1015608126}
   - {fileID: 1312436485}
+  timeToSpawn: 0.2
   cube: 0
   light: 0
   player: 0
