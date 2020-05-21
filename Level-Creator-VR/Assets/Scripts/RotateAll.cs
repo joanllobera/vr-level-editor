@@ -47,13 +47,13 @@ public class RotateAll : MonoBehaviour
         if (cam2.enabled)
         {
 
-            Vector2 input = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+            //Vector2 input = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
 
-            rotationX = input.x;
-            rotationY = input.y;
+           // rotationX = input.x;
+            // = input.y;
 
-            //rotationX= Input.GetAxis("Mouse X");
-            //rotationY =Input.GetAxis("Mouse Y");
+            rotationX= Input.GetAxis("Mouse X");
+            rotationY =Input.GetAxis("Mouse Y");
 
             transform.Rotate(rotationY * speed * Time.deltaTime, -rotationX * speed * Time.deltaTime, 0);
             

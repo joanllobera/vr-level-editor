@@ -683,6 +683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 433011190}
+  - component: {fileID: 433011191}
   m_Layer: 0
   m_Name: Rotator
   m_TagString: Untagged
@@ -698,13 +699,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433011189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.71, y: 10.68, z: 22.87}
+  m_LocalPosition: {x: -1.71, y: 10.68, z: 4.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1912005286}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &433011191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433011189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70255106f3ede76468ec67d3e2590935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 60
 --- !u!1 &498158248 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2863212489384232611, guid: a3b6e37f7d6d5a34ebacbf591132b2e4,
@@ -1792,7 +1806,6 @@ GameObject:
   - component: {fileID: 1912005286}
   - component: {fileID: 1912005289}
   - component: {fileID: 1912005288}
-  - component: {fileID: 1912005287}
   m_Layer: 0
   m_Name: CameraMovil
   m_TagString: Untagged
@@ -1814,19 +1827,6 @@ Transform:
   m_Father: {fileID: 433011190}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1912005287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912005285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70255106f3ede76468ec67d3e2590935, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 60
 --- !u!81 &1912005288
 AudioListener:
   m_ObjectHideFlags: 0
