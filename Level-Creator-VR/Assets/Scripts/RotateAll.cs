@@ -47,30 +47,34 @@ public class RotateAll : MonoBehaviour
         if (cam2.enabled)
         {
 
-            //Vector2 input = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
 
-           // rotationX = input.x;
-            // = input.y;
-
-            rotationX= Input.GetAxis("Mouse X");
-            rotationY =Input.GetAxis("Mouse Y");
-
-            transform.Rotate(rotationY * speed * Time.deltaTime, -rotationX * speed * Time.deltaTime, 0);
-            
             //zoom in/out
-            /*if (OVRInput.Get(OVRInput.Button.PrimaryShoulder))
+            //if (OVRInput.Get(OVRInput.Button.PrimaryShoulder))
+            if (Input.GetKey(KeyCode.G))
             {
-                Vector2 translation = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
-
-                incrementTowards = translation.y;
+                //Vector2 translation = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+                //incrementTowards = translation.y;
+                rotationY = Input.GetAxis("Mouse Y");
+                incrementTowards = rotationY;
 
                 if (incrementTowards != incrementTowardsAux)
                 {
-                    
+
                     cam2.fieldOfView -= (incrementTowards * 2);
                     incrementTowardsAux = incrementTowards;
                 }
-            }*/
+            }
+            else
+            {
+            //Vector2 input = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+
+            // rotationX = input.x;
+            // rotationY = input.y;
+                rotationX = Input.GetAxis("Mouse X");
+                rotationY = Input.GetAxis("Mouse Y");
+
+                transform.Rotate(rotationY * speed * Time.deltaTime, -rotationX * speed * Time.deltaTime, 0);
+            }
         }
     }
 }
