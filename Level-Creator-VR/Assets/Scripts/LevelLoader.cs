@@ -7,11 +7,22 @@ using System.IO;
 public class LevelLoader : MonoBehaviour
 {
     [Serializable]
+    public class SaveObject 
+    {
+        public Vector3 pos, scale;
+        public Quaternion rot;
+        public SaveObject(Vector3 p, Quaternion r, Vector3 s) 
+        {
+            pos = p; scale = s; rot = r;
+        }
+    }
+
+    [Serializable]
     public class LevelData 
     {
-        public List<Transform> players = new List<Transform>();
-        public List<Transform> lights = new List<Transform>();
-        public List<Transform> cubes = new List<Transform>();
+        public List<SaveObject> players = new List<SaveObject>();
+        public List<SaveObject> lights = new List<SaveObject>();
+        public List<SaveObject> cubes = new List<SaveObject>();
     }
     LevelData data = new LevelData();
 
@@ -63,21 +74,21 @@ public class LevelLoader : MonoBehaviour
         GameObject[] cubes = GameObject.FindGameObjectsWithTag("cube");
         foreach(GameObject c in cubes)
         {
-            data.cubes.Add(c.transform);
+            data.cubes.Add(new SaveObject(c.transform.position, c.transform.rotation, c.transform.localScale));
         }
 
         // Lights
         GameObject[] lights = GameObject.FindGameObjectsWithTag("light");
         foreach (GameObject l in lights)
         {
-            data.lights.Add(l.transform);
+            data.lights.Add(new SaveObject(l.transform.position, l.transform.rotation, l.transform.localScale));
         }
 
         // Players
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject p in players)
         {
-            data.players.Add(p.transform);
+            data.players.Add(new SaveObject(p.transform.position, p.transform.rotation, p.transform.localScale));
         }
 
         // We save the data in the json
@@ -115,30 +126,33 @@ public class LevelLoader : MonoBehaviour
             data = JsonUtility.FromJson<LevelData>(json);
 
             // Lights
-            foreach (Transform c in data.lights)
+            foreach (SaveObject c in data.lights)
             {
                 // We spawn the cubes
                 GameObject g = (GameObject)Instantiate(Resources.Load("Light"));
-                g.transform.SetPositionAndRotation(c.position, c.rotation);
-                g.transform.localScale = c.localScale;
+                g.transform.SetPositionAndRotation(c.pos, c.rot);
+                g.transform.localScale = c.scale;
+                g.SetActive(true);
             }
 
             // Player
-            foreach (Transform c in data.players)
+            foreach (SaveObject c in data.players)
             {
                 // We spawn the cubes
                 GameObject g = (GameObject)Instantiate(Resources.Load("Player"));
-                g.transform.SetPositionAndRotation(c.position, c.rotation);
-                g.transform.localScale = c.localScale;
+                g.transform.SetPositionAndRotation(c.pos, c.rot);
+                g.transform.localScale = c.scale;
+                g.SetActive(true);
             }
 
             // Cubes
-            foreach (Transform c in data.cubes)
+            foreach (SaveObject c in data.cubes)
             {
                 // We spawn the cubes
                 GameObject g = (GameObject)Instantiate(Resources.Load("Cube"));
-                g.transform.SetPositionAndRotation(c.position, c.rotation);
-                g.transform.localScale = c.localScale;
+                g.transform.SetPositionAndRotation(c.pos, c.rot);
+                g.transform.localScale = c.scale;
+                g.SetActive(true);
             }
         }
         else
