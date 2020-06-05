@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour
     public GameObject leftHand;
     public GameObject lightPrefab;
     public GameObject playerPrefab;
+    public GameObject axisRotatorPrefab;
     public GameObject cubeHand, lightHand, playerHand, checkpointHand, finishHand, axisRotatorHand;
     public GameObject testObject;
     public Material cubeMat;
@@ -225,6 +226,62 @@ public class Spawner : MonoBehaviour
                 hasPlayer = true;
                 //spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
                 spawnOnce = true;
+            }
+            else if(axisRotator)
+            {
+                bool isOnCorner = false;
+
+                RaycastHit hit2;
+                if(Physics.Raycast(axisRotatorHand.transform.position, axisRotatorHand.transform.TransformDirection(Vector3.forward), out hit2, 1.5f))
+                {
+                    if(hit2.transform.tag == "cube")
+                    {
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                    }
+                }
+                if(Physics.Raycast(axisRotatorHand.transform.position, axisRotatorHand.transform.TransformDirection(Vector3.back), out hit2, 1.5f))
+                {
+                    if(hit2.transform.tag == "cube")
+                    {
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                    }
+                }
+                if(Physics.Raycast(axisRotatorHand.transform.position, axisRotatorHand.transform.TransformDirection(Vector3.up), out hit2, 1.5f))
+                {
+                    if(hit2.transform.tag == "cube")
+                    {
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                    }
+                }
+                if(Physics.Raycast(axisRotatorHand.transform.position, axisRotatorHand.transform.TransformDirection(Vector3.down), out hit2, 1.5f))
+                {
+                    if(hit2.transform.tag == "cube")
+                    {
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                    }
+                }
+                if(Physics.Raycast(axisRotatorHand.transform.position, axisRotatorHand.transform.TransformDirection(Vector3.left), out hit2, 1.5f))
+                {
+                    if(hit2.transform.tag == "cube")
+                    {
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                    }
+                }
+                if(Physics.Raycast(axisRotatorHand.transform.position, axisRotatorHand.transform.TransformDirection(Vector3.right), out hit2, 1.5f))
+                {
+                    if(hit2.transform.tag == "cube")
+                    {
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                    }
+                }
+
+                if(isOnCorner)
+                {
+                    GameObject axisRot = Instantiate(axisRotatorPrefab, axisRotatorHand.transform.position, lightHand.transform.rotation);
+                    spawnedObjects.Add(axisRot);
+                    urManager.AddAction(new ModuleCreate(axisRot), spawnedObjects);
+                    spawnOnce = true;
+                }
             }
 
         }

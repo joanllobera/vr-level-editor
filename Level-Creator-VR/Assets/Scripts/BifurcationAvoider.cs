@@ -5,6 +5,7 @@ using UnityEngine;
 public class BifurcationAvoider : MonoBehaviour
 {
     public byte raycastCount;
+    public bool isCorner;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class BifurcationAvoider : MonoBehaviour
     void Update()
     {
         raycastCount = 0;
+        
         RaycastHit hit;
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1f))
         {
@@ -58,6 +60,13 @@ public class BifurcationAvoider : MonoBehaviour
             {
                 raycastCount++;
             }
+        }
+
+
+        isCorner = false;
+        if(raycastCount > 1)
+        {
+            isCorner = true;
         }
     }
 }
