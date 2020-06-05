@@ -44,6 +44,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (cube)
         {
             cubeHand.SetActive(true);
@@ -127,62 +128,63 @@ public class Spawner : MonoBehaviour
                     if(timeToSpawn <= 0.0f)
                     {
                         bool canSpawn = true;
-                        RaycastHit hit;
-                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.forward), out hit, 1.5f))
+                        
+                        RaycastHit hit2;
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.forward), out hit2, 1.5f))
                         {
-                            if(hit.transform.tag == "cube")
+                            if(hit2.transform.tag == "cube")
                             {
-                                if(hit.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
+                                if(hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
                                 {
                                     canSpawn = false;
                                 }
                             }
                         }
-                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.back), out hit, 1.5f))
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.back), out hit2, 1.5f))
                         {
-                            if(hit.transform.tag == "cube")
+                            if(hit2.transform.tag == "cube")
                             {
-                                if(hit.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
+                                if(hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
                                 {
                                     canSpawn = false;
                                 }
                             }
                         }
-                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.up), out hit, 1.5f))
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.up), out hit2, 1.5f))
                         {
-                            if(hit.transform.tag == "cube")
+                            if(hit2.transform.tag == "cube")
                             {
-                                if(hit.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
+                                if(hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
                                 {
                                     canSpawn = false;
                                 }
                             }
                         }
-                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.down), out hit, 1.5f))
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.down), out hit2, 1.5f))
                         {
-                            if(hit.transform.tag == "cube")
+                            if(hit2.transform.tag == "cube")
                             {
-                                if(hit.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
+                                if(hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
                                 {
                                     canSpawn = false;
                                 }
                             }
                         }
-                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.left), out hit, 1.5f))
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.left), out hit2, 1.5f))
                         {
-                            if(hit.transform.tag == "cube")
+                            if(hit2.transform.tag == "cube")
                             {
-                                if(hit.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
+                                if(hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
                                 {
                                     canSpawn = false;
                                 }
                             }
                         }
-                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.right), out hit, 1.5f))
+                        if(Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.right), out hit2, 1.5f))
                         {
-                            if(hit.transform.tag == "cube")
+                            if(hit2.transform.tag == "cube")
                             {
-                                if(hit.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
+                                if(hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
                                 {
                                     canSpawn = false;
                                 }
@@ -215,13 +217,13 @@ public class Spawner : MonoBehaviour
                 urManager.AddAction(new ModuleCreate(g), spawnedObjects);
             }
             else if(player && !hasPlayer)
-            {
-                GameObject playerObject = Instantiate(playerPrefab, playerHand.transform.position, playerHand.transform.rotation);
+            {                
+                GameObject playerObject = Instantiate(playerPrefab, playerHand.transform.position, playerHand.GetComponent<Player_Hand_Behaviour>().rotation);
                 spawnedObjects.Add(playerObject);
                 urManager.AddAction(new ModuleCreate(playerObject), spawnedObjects);
                 playerObj = playerObject;
                 hasPlayer = true;
-                spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
+                //spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
                 spawnOnce = true;
             }
 

@@ -24,10 +24,54 @@ public class Player_Hand_Behaviour : MonoBehaviour
 
     //hit for distance checking
     RaycastHit hit;
+    public Quaternion rotation;
 
     // Update is called once per frame
     void Update()
     {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1.5f))
+        {
+            if(hit.transform.tag == "cube")
+            {
+                rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            }
+        }
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1.5f))
+        {
+            if(hit.transform.tag == "cube")
+            {
+                rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            }
+        }
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, 1.5f))
+        {
+            if(hit.transform.tag == "cube")
+            {
+                rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            }
+        }
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1.5f))
+        {
+            if(hit.transform.tag == "cube")
+            {
+                rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            }
+        }
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1.5f))
+        {
+            if(hit.transform.tag == "cube")
+            {
+                rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            }
+        }
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1.5f))
+        {
+            if(hit.transform.tag == "cube")
+            {
+                rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            }
+        }
         /*transform.position = new Vector3(Mathf.Round(handParent.position.x),
                                          Mathf.Round(handParent.position.y),
                                          Mathf.Round(handParent.position.z));
