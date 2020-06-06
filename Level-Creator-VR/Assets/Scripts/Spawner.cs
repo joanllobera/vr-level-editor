@@ -30,6 +30,8 @@ public class Spawner : MonoBehaviour
     public LevelLoader levelLoader;
     public UndoRedoManager urManager;
 
+    private int previousButtonIndex;
+
     void Start()
     {
         delete = false;
@@ -40,6 +42,7 @@ public class Spawner : MonoBehaviour
 
         timeToSpawnInit = timeToSpawn;
         timeToSpawn= 0.0f;
+        previousButtonIndex = 0;
     }
 
     // Update is called once per frame
@@ -354,6 +357,16 @@ public class Spawner : MonoBehaviour
                 checkpoint = false;
                 finish = false;
                 axisRotator = false;
+
+                /*for(int i = 0; i < selectionText.Count; i++)
+                {
+                    selectionText[i].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                }*/
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[0].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 0;
             }
 
             if (hit.transform.tag == "activateLight")
@@ -372,6 +385,11 @@ public class Spawner : MonoBehaviour
                 checkpoint = false;
                 finish = false;
                 axisRotator = false;
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[2].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 2;
             }
 
             if (hit.transform.tag == "activatePlayer")
@@ -390,6 +408,11 @@ public class Spawner : MonoBehaviour
                 player = true;
                 axisRotator = false;
                 finish = false;
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[1].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 1;
             }
 
             // Checkpoint
@@ -409,6 +432,11 @@ public class Spawner : MonoBehaviour
                 checkpoint = true;
                 finish = false;
                 axisRotator = false;
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[4].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 4;
             }
 
             // Finish
@@ -428,6 +456,11 @@ public class Spawner : MonoBehaviour
                 checkpoint = false;
                 finish = true;
                 axisRotator = false;
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[5].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 5;
             }
 
             // AxisRotator
@@ -447,6 +480,11 @@ public class Spawner : MonoBehaviour
                 checkpoint = false;
                 finish = false;
                 axisRotator = true;
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[6].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 6;
             }
 
             // Undo
@@ -461,6 +499,11 @@ public class Spawner : MonoBehaviour
             if (hit.transform.tag == "undo" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
                 urManager.Undo();
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[3].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 3;
             }
 
             // Redo
@@ -475,6 +518,11 @@ public class Spawner : MonoBehaviour
             if (hit.transform.tag == "redo" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
                 urManager.Redo();
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[7].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 7;
             }
 
             // Play
@@ -492,6 +540,11 @@ public class Spawner : MonoBehaviour
                 {
                     playerObj.GetComponent<Movement>().Activate();
                 }
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[8].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 8;
             }
 
             // Remove Player
@@ -510,6 +563,11 @@ public class Spawner : MonoBehaviour
                     Destroy(playerObj);
                     hasPlayer = false;
                 }
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[11].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 11;
             }
 
             // Load
@@ -524,6 +582,11 @@ public class Spawner : MonoBehaviour
             if (hit.transform.tag == "load" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
                 levelLoader.OpenLoadCanvas();
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[10].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 10;
             }
 
             // Save
@@ -539,6 +602,11 @@ public class Spawner : MonoBehaviour
             {
                 gualdal = true;
                 levelLoader.OpenSaveCanvas();
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[9].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 9;
+
             }
             else if (Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.2f)
             {

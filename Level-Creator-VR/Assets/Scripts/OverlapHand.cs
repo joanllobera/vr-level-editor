@@ -33,7 +33,7 @@ public class OverlapHand : MonoBehaviour
             spawner.checkpoint = false;
             spawner.finish = false;
             spawner.axisRotator = false;
-            spawner.selectionText[0].GetComponent<Text>().color = Color.white;
+            /*spawner.selectionText[0].GetComponent<Text>().color = Color.white;
             spawner.selectionText[1].GetComponent<Text>().color = Color.black;
             spawner.selectionText[2].GetComponent<Text>().color = Color.black;
             spawner.selectionText[3].GetComponent<Text>().color = Color.black;
@@ -43,7 +43,11 @@ public class OverlapHand : MonoBehaviour
             spawner.selectionText[7].GetComponent<Text>().color = Color.black;
             spawner.selectionText[8].GetComponent<Text>().color = Color.black;
             spawner.selectionText[9].GetComponent<Text>().color = Color.black;
-            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;*/
+            for(int i = 0; i < spawner.selectionText.Count; i++)
+            {
+                spawner.selectionText[i].GetComponent<ButtonController>().changeColor(other.transform.tag);
+            }
 
         }
         if(other.transform.CompareTag("activateLight"))
@@ -54,7 +58,7 @@ public class OverlapHand : MonoBehaviour
             spawner.checkpoint = false;
             spawner.finish = false;
             spawner.axisRotator = false;
-            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            /*spawner.selectionText[0].GetComponent<Text>().color = Color.black;
             spawner.selectionText[1].GetComponent<Text>().color = Color.black;
             spawner.selectionText[2].GetComponent<Text>().color = Color.white;
             spawner.selectionText[3].GetComponent<Text>().color = Color.black;
@@ -64,7 +68,11 @@ public class OverlapHand : MonoBehaviour
             spawner.selectionText[7].GetComponent<Text>().color = Color.black;
             spawner.selectionText[8].GetComponent<Text>().color = Color.black;
             spawner.selectionText[9].GetComponent<Text>().color = Color.black;
-            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;*/
+            for(int i = 0; i < spawner.selectionText.Count; i++)
+            {
+                spawner.selectionText[i].GetComponent<ButtonController>().changeColor(other.transform.tag);
+            }
         }
         if(other.transform.CompareTag("activatePlayer"))
         {
@@ -74,7 +82,7 @@ public class OverlapHand : MonoBehaviour
             spawner.player = true;
             spawner.axisRotator = false;
             spawner.finish = false;
-            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            /*spawner.selectionText[0].GetComponent<Text>().color = Color.black;
             spawner.selectionText[1].GetComponent<Text>().color = Color.white;
             spawner.selectionText[2].GetComponent<Text>().color = Color.black;
             spawner.selectionText[3].GetComponent<Text>().color = Color.black;
@@ -84,7 +92,11 @@ public class OverlapHand : MonoBehaviour
             spawner.selectionText[7].GetComponent<Text>().color = Color.black;
             spawner.selectionText[9].GetComponent<Text>().color = Color.black;
             spawner.selectionText[8].GetComponent<Text>().color = Color.black;
-            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;*/
+            for(int i = 0; i < spawner.selectionText.Count; i++)
+            {
+                spawner.selectionText[i].GetComponent<ButtonController>().changeColor(other.transform.tag);
+            }
         }
         if(other.transform.CompareTag("activateCheckpoint"))
         {
@@ -94,7 +106,7 @@ public class OverlapHand : MonoBehaviour
             spawner.checkpoint = true;
             spawner.finish = false;
             spawner.axisRotator = false;
-            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            /*spawner.selectionText[0].GetComponent<Text>().color = Color.black;
             spawner.selectionText[1].GetComponent<Text>().color = Color.black;
             spawner.selectionText[2].GetComponent<Text>().color = Color.black;
             spawner.selectionText[3].GetComponent<Text>().color = Color.black;
@@ -104,7 +116,11 @@ public class OverlapHand : MonoBehaviour
             spawner.selectionText[7].GetComponent<Text>().color = Color.black;
             spawner.selectionText[8].GetComponent<Text>().color = Color.black;
             spawner.selectionText[9].GetComponent<Text>().color = Color.black;
-            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;*/
+            for(int i = 0; i < spawner.selectionText.Count; i++)
+            {
+                spawner.selectionText[i].GetComponent<ButtonController>().changeColor(other.transform.tag);
+            }
             
         }
         if(other.transform.CompareTag("activateFinish"))
@@ -115,7 +131,7 @@ public class OverlapHand : MonoBehaviour
             spawner.checkpoint = false;
             spawner.finish = true;
             spawner.axisRotator = false;
-            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            /*spawner.selectionText[0].GetComponent<Text>().color = Color.black;
             spawner.selectionText[1].GetComponent<Text>().color = Color.black;
             spawner.selectionText[2].GetComponent<Text>().color = Color.black;
             spawner.selectionText[3].GetComponent<Text>().color = Color.black;
@@ -125,7 +141,11 @@ public class OverlapHand : MonoBehaviour
             spawner.selectionText[7].GetComponent<Text>().color = Color.black;
             spawner.selectionText[8].GetComponent<Text>().color = Color.black;
             spawner.selectionText[9].GetComponent<Text>().color = Color.black;
-            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;*/
+            for(int i = 0; i < spawner.selectionText.Count; i++)
+            {
+                spawner.selectionText[i].GetComponent<ButtonController>().changeColor(other.transform.tag);
+            }
         }
         if(other.transform.CompareTag("activateAxisRotator"))
         {
@@ -135,7 +155,7 @@ public class OverlapHand : MonoBehaviour
             spawner.checkpoint = false;
             spawner.finish = false;
             spawner.axisRotator = true;
-            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            /*spawner.selectionText[0].GetComponent<Text>().color = Color.black;
             spawner.selectionText[1].GetComponent<Text>().color = Color.black;
             spawner.selectionText[2].GetComponent<Text>().color = Color.black;
             spawner.selectionText[3].GetComponent<Text>().color = Color.black;
@@ -145,11 +165,15 @@ public class OverlapHand : MonoBehaviour
             spawner.selectionText[7].GetComponent<Text>().color = Color.black;
             spawner.selectionText[8].GetComponent<Text>().color = Color.black;
             spawner.selectionText[9].GetComponent<Text>().color = Color.black;
-            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;*/
+            for(int i = 0; i < spawner.selectionText.Count; i++)
+            {
+                spawner.selectionText[i].GetComponent<ButtonController>().changeColor(other.transform.tag);
+            }
         }
         if(other.transform.CompareTag("undo"))
         {
-            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            /*spawner.selectionText[0].GetComponent<Text>().color = Color.black;
             spawner.selectionText[1].GetComponent<Text>().color = Color.black;
             spawner.selectionText[2].GetComponent<Text>().color = Color.black;
             spawner.selectionText[3].GetComponent<Text>().color = Color.white;
@@ -159,12 +183,16 @@ public class OverlapHand : MonoBehaviour
             spawner.selectionText[7].GetComponent<Text>().color = Color.black;
             spawner.selectionText[8].GetComponent<Text>().color = Color.black;
             spawner.selectionText[9].GetComponent<Text>().color = Color.black;
-            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;*/
+            for(int i = 0; i < spawner.selectionText.Count; i++)
+            {
+                spawner.selectionText[i].GetComponent<ButtonController>().changeColor(other.transform.tag);
+            }
             spawner.urManager.Undo();
         }
         if(other.transform.CompareTag("redo"))
         {
-            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            /*spawner.selectionText[0].GetComponent<Text>().color = Color.black;
             spawner.selectionText[1].GetComponent<Text>().color = Color.black;
             spawner.selectionText[2].GetComponent<Text>().color = Color.black;
             spawner.selectionText[3].GetComponent<Text>().color = Color.black;
@@ -174,12 +202,16 @@ public class OverlapHand : MonoBehaviour
             spawner.selectionText[7].GetComponent<Text>().color = Color.white;
             spawner.selectionText[8].GetComponent<Text>().color = Color.black;
             spawner.selectionText[9].GetComponent<Text>().color = Color.black;
-            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;*/
+            for(int i = 0; i < spawner.selectionText.Count; i++)
+            {
+                spawner.selectionText[i].GetComponent<ButtonController>().changeColor(other.transform.tag);
+            }
             spawner.urManager.Redo();
         }
         if(other.transform.CompareTag("play"))
         {
-            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            /*spawner.selectionText[0].GetComponent<Text>().color = Color.black;
             spawner.selectionText[1].GetComponent<Text>().color = Color.black;
             spawner.selectionText[2].GetComponent<Text>().color = Color.black;
             spawner.selectionText[3].GetComponent<Text>().color = Color.black;
@@ -189,12 +221,16 @@ public class OverlapHand : MonoBehaviour
             spawner.selectionText[7].GetComponent<Text>().color = Color.black;
             spawner.selectionText[8].GetComponent<Text>().color = Color.white;
             spawner.selectionText[9].GetComponent<Text>().color = Color.black;
-            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;*/
+            for(int i = 0; i < spawner.selectionText.Count; i++)
+            {
+                spawner.selectionText[i].GetComponent<ButtonController>().changeColor(other.transform.tag);
+            }
             //PLAY
         }
         if(other.transform.CompareTag("load"))
         {
-            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            /*spawner.selectionText[0].GetComponent<Text>().color = Color.black;
             spawner.selectionText[1].GetComponent<Text>().color = Color.black;
             spawner.selectionText[2].GetComponent<Text>().color = Color.black;
             spawner.selectionText[3].GetComponent<Text>().color = Color.black;
@@ -204,12 +240,16 @@ public class OverlapHand : MonoBehaviour
             spawner.selectionText[7].GetComponent<Text>().color = Color.black;
             spawner.selectionText[8].GetComponent<Text>().color = Color.black;
             spawner.selectionText[9].GetComponent<Text>().color = Color.black;
-            spawner.selectionText[10].GetComponent<Text>().color = Color.white;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.white;*/
+            for(int i = 0; i < spawner.selectionText.Count; i++)
+            {
+                spawner.selectionText[i].GetComponent<ButtonController>().changeColor(other.transform.tag);
+            }
             spawner.levelLoader.OpenLoadCanvas();
         }
         if(other.transform.CompareTag("save"))
         {
-            spawner.selectionText[0].GetComponent<Text>().color = Color.black;
+            /*spawner.selectionText[0].GetComponent<Text>().color = Color.black;
             spawner.selectionText[1].GetComponent<Text>().color = Color.black;
             spawner.selectionText[2].GetComponent<Text>().color = Color.black;
             spawner.selectionText[3].GetComponent<Text>().color = Color.black;
@@ -219,7 +259,11 @@ public class OverlapHand : MonoBehaviour
             spawner.selectionText[7].GetComponent<Text>().color = Color.black;
             spawner.selectionText[8].GetComponent<Text>().color = Color.black;
             spawner.selectionText[9].GetComponent<Text>().color = Color.white;
-            spawner.selectionText[10].GetComponent<Text>().color = Color.black;
+            spawner.selectionText[10].GetComponent<Text>().color = Color.black;*/
+            for(int i = 0; i < spawner.selectionText.Count; i++)
+            {
+                spawner.selectionText[i].GetComponent<ButtonController>().changeColor(other.transform.tag);
+            }
             spawner.gualdal = true;
             spawner.levelLoader.OpenSaveCanvas();
         }
