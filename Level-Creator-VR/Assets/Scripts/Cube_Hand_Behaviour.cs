@@ -5,6 +5,11 @@ using UnityEngine;
 public class Cube_Hand_Behaviour : MonoBehaviour
 {
     [SerializeField] Transform handParent;
+    private void Start()
+    {
+        handParent = GameObject.Find("RightHandAnchor").transform;
+    }
+
     // Update is called once per frame
     void Update()
     {

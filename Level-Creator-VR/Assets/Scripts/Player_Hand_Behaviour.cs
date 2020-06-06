@@ -26,6 +26,13 @@ public class Player_Hand_Behaviour : MonoBehaviour
     RaycastHit hit;
     public Quaternion rotation;
 
+    private void Start()
+    {
+        unplaceableMat = (Material)Resources.Load("unplaceableMat", typeof(Material));
+        placeableMat = (Material)Resources.Load("placeableMat", typeof(Material));
+        handParent = GameObject.Find("Raycaster").transform;
+    }
+
     // Update is called once per frame
     void Update()
     {
