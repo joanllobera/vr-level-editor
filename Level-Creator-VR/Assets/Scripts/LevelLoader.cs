@@ -44,7 +44,7 @@ public class LevelLoader : MonoBehaviour
     void LateUpdate()
     {
         RaycastHit hit;
-        if (Physics.Raycast(leftHand.transform.position, leftHand.transform.forward, out hit, 30))
+        if (Physics.Raycast(leftHand.transform.position, leftHand.transform.forward, out hit, 30) && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
         {
             if (hit.transform.tag == "backButton") 
             {
