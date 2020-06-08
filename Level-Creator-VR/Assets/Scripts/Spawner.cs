@@ -612,6 +612,26 @@ public class Spawner : MonoBehaviour
             {
                 gualdal = false;
             }
+            if (hit.transform.tag == "stop")
+            {
+                selectionText[12].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[12].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "stop" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                if (hasPlayer)
+                {
+                    playerObj.GetComponent<Movement>().Deactivate();
+                }
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[12].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 12;
+            }
         }
         
     }
