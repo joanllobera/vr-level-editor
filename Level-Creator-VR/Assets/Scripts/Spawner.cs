@@ -19,7 +19,9 @@ public class Spawner : MonoBehaviour
     public GameObject axisRotatorPrefab;
     public GameObject cubeHand, lightHand, playerHand, checkpointHand, finishHand, axisRotatorHand;
     public GameObject testObject;
+    public GameObject cam;
     public Material cubeMat;
+    public GameObject canvas;
     public Material deleteMat;
     public List<GameObject> selectionText = new List<GameObject>();
 
@@ -48,7 +50,6 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (cube)
         {
             cubeHand.SetActive(true);
@@ -324,6 +325,12 @@ public class Spawner : MonoBehaviour
                 cubeHand.GetComponent<MeshRenderer>().material = cubeMat;
                 delete = false;
             }
+        }
+
+        if(Input.GetAxis("Oculus_CrossPlatform_PrimaryHandTrigger") > 0.3f)
+        {
+            canvas.transform.position = cam.transform.position + cam.transform.forward * 23 + new Vector3(2, -2, 0);
+            canvas.transform.LookAt(2 * canvas.transform.position - cam.transform.position);
         }
 
 

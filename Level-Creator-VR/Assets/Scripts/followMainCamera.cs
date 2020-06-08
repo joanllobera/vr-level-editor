@@ -9,7 +9,7 @@ public class followMainCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         player = GameObject.Find("Player");        
+         player = GameObject.Find("GameController");        
     }
 
     // Update is called once per frame
