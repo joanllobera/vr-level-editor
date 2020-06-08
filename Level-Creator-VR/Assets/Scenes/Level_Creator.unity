@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gualdal: 0
   spawnedObjects: []
-  cubePrefab: {fileID: 2863212489384232611, guid: daa5586d99ff63049bb8fb17c6708fd0,
+  cubePrefab: {fileID: 2863212489384232611, guid: d063fc4f886ef134f97925a5040c89be,
     type: 3}
   leftHand: {fileID: 65146536}
   lightPrefab: {fileID: 2863212489384232611, guid: ed3c7a92c6353d2458b02ee7b4cf19ec,
