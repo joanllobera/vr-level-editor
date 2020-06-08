@@ -201,13 +201,13 @@ public class Player_Hand_Behaviour : MonoBehaviour
                     z = closestObject.transform.position.z + closestObject.transform.localScale.z;
                     break;
             }
-            this.gameObject.GetComponent<MeshRenderer>().material = placeableMat;
+            this.gameObject.GetComponentInChildren<MeshRenderer>().material = placeableMat;
             transform.position = new Vector3(x, y, z);
         }
         else
         {
             //transform.position = handParent.transform.position;
-            this.gameObject.GetComponent<MeshRenderer>().material = unplaceableMat;
+            this.gameObject.GetComponentInChildren<MeshRenderer>().material = unplaceableMat;
         }
 
     }

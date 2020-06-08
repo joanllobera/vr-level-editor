@@ -157,4 +157,9 @@ public class Movement : MonoBehaviour
     {
         alive = true;
     }
+
+    public void Deactivate()
+    {
+        alive = false;
+    }
 }
