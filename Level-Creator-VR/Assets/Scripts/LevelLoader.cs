@@ -42,8 +42,8 @@ public class LevelLoader : MonoBehaviour
         leftHand = GameObject.Find("LeftControllerAnchor");
         loadCanvas.SetActive(false);
         saveCanvas.SetActive(false);
-        Save(1);
-        LoadSave(Application.dataPath + "/save1.txt");
+        //Save(1);
+        //LoadSave(Application.dataPath + "/save1.txt");
     }
 
     void LateUpdate()
@@ -134,7 +134,7 @@ public class LevelLoader : MonoBehaviour
             foreach (SaveObject c in data.lights)
             {
                 // We spawn the cubes
-                GameObject g = (GameObject)Instantiate(Resources.Load("Light"));
+                GameObject g = (GameObject)Instantiate(Resources.Load("Light_Spawned"));
                 g.transform.SetPositionAndRotation(c.pos, c.rot);
                 g.transform.localScale = c.scale;
                 g.SetActive(true);
