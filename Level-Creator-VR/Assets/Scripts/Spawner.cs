@@ -294,42 +294,42 @@ public class Spawner : MonoBehaviour
                 {
                     if(hit2.transform.tag == "cube")
                     {
-                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isNextToCorner;
                     }
                 }
                 if(Physics.Raycast(axisRotatorHand.transform.position, axisRotatorHand.transform.TransformDirection(Vector3.back), out hit2, 1.5f))
                 {
                     if(hit2.transform.tag == "cube")
                     {
-                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isNextToCorner;
                     }
                 }
                 if(Physics.Raycast(axisRotatorHand.transform.position, axisRotatorHand.transform.TransformDirection(Vector3.up), out hit2, 1.5f))
                 {
                     if(hit2.transform.tag == "cube")
                     {
-                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isNextToCorner;
                     }
                 }
                 if(Physics.Raycast(axisRotatorHand.transform.position, axisRotatorHand.transform.TransformDirection(Vector3.down), out hit2, 1.5f))
                 {
                     if(hit2.transform.tag == "cube")
                     {
-                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isNextToCorner;
                     }
                 }
                 if(Physics.Raycast(axisRotatorHand.transform.position, axisRotatorHand.transform.TransformDirection(Vector3.left), out hit2, 1.5f))
                 {
                     if(hit2.transform.tag == "cube")
                     {
-                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isNextToCorner;
                     }
                 }
                 if(Physics.Raycast(axisRotatorHand.transform.position, axisRotatorHand.transform.TransformDirection(Vector3.right), out hit2, 1.5f))
                 {
                     if(hit2.transform.tag == "cube")
                     {
-                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isCorner;
+                        isOnCorner = hit2.transform.gameObject.GetComponent<BifurcationAvoider>().isNextToCorner;
                     }
                 }
 
