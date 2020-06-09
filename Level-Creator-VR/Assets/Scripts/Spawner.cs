@@ -29,6 +29,8 @@ public class Spawner : MonoBehaviour
     public Material deleteMat;
     public List<GameObject> selectionText = new List<GameObject>();
 
+    public GameObject tooltipText;
+
     public float timeToSpawn;
     float timeToSpawnInit;
     public bool cube, light, player, checkpoint, finish, axisRotator, gapPast, gapPresent;
@@ -37,6 +39,8 @@ public class Spawner : MonoBehaviour
     public UndoRedoManager urManager;
 
     private int previousButtonIndex;
+
+    private string cubeHelp, pastCubeHelp, futureCubeHelp, dirLightHelp, checkPointHelp, characterHelp, undoHelp, redoHelp, portalHelp, axisRotatorHelp, playHelp, stopHelp, saveHelp, loadHelp, mobileHelp, removeCharacterHelp;
 
     void Start()
     {
@@ -49,6 +53,25 @@ public class Spawner : MonoBehaviour
         timeToSpawnInit = timeToSpawn;
         timeToSpawn= 0.0f;
         previousButtonIndex = 0;
+
+        cubeHelp = "Cube - Use this to build the basic geometry of the level";
+        pastCubeHelp = "Past Cube - Past cubes, only visible in the ";
+        futureCubeHelp = "Future Cube - Future cubes, only visible in the ";
+        dirLightHelp = "Directional Light - Use this to place a directional light in the level";
+        checkPointHelp = "Checkpoint - Place a checkpoint within the level";
+        characterHelp = "Character - Use this to place the character in the level";
+        undoHelp = "Undo - Reverse the last command executed";
+        redoHelp = "Redo - Repeat your previous command";
+        portalHelp = "Portal - Place a portal inside the level";
+        axisRotatorHelp = "Axis Rotator - ";
+        playHelp = "Play - Start playing your level";
+        stopHelp = "Stop - Pause the gameplay";
+        saveHelp = "Save - Save your current level progress";
+        loadHelp = "Load - Load a saved level layout";
+        mobileHelp = "Mobile View - Swap to mobile view";
+        removeCharacterHelp = "Remove Character - Removes the character from the current level";
+
+
     }
 
     // Update is called once per frame
@@ -432,6 +455,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[0].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 0;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = cubeHelp;
             }
 
             if (hit.transform.tag == "activateLight")
@@ -457,6 +483,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[2].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 2;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = dirLightHelp;
             }
 
             if (hit.transform.tag == "activatePlayer")
@@ -482,6 +511,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[1].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 1;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = characterHelp;
             }
 
             // Checkpoint
@@ -508,6 +540,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[4].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 4;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = checkPointHelp;
             }
 
             // Finish
@@ -534,6 +569,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[5].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 5;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = cubeHelp;
             }
 
             // AxisRotator
@@ -560,6 +598,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[6].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 6;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = axisRotatorHelp;
             }
 
             // Undo
@@ -579,6 +620,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[3].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 3;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = undoHelp;
             }
             else if(Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.3f && undoOnce)
             {
@@ -602,6 +646,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[7].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 7;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = redoHelp;
             }
             else if (Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.3f && redoOnce)
             {
@@ -634,6 +681,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[8].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 8;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = playHelp;
             }
 
             //GapPast
@@ -660,6 +710,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[8].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 13;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = pastCubeHelp;
             }
 
             //GapPresent
@@ -686,6 +739,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[4].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 14;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = futureCubeHelp;
             }
 
             // Remove Player
@@ -709,6 +765,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[11].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 11;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = removeCharacterHelp;
             }
 
             // Load
@@ -728,6 +787,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[10].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 10;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = loadHelp;
             }
 
             // Save
@@ -747,6 +809,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[9].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 9;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = saveHelp;
 
             }
             else if (Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.2f)
@@ -772,6 +837,9 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[12].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 12;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = stopHelp;
             }
         }
         

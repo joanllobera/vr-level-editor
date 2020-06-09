@@ -1785,6 +1785,7 @@ MonoBehaviour:
   - {fileID: 2026885151}
   - {fileID: 1436166606}
   - {fileID: 778798842}
+  tooltipText: {fileID: 467876510640464420}
   timeToSpawn: 0.2
   cube: 0
   light: 0
@@ -3703,7 +3704,7 @@ RectTransform:
   m_Children:
   - {fileID: 2050914541}
   m_Father: {fileID: 407576243}
-  m_RootOrder: 15
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4214,8 +4215,74 @@ PrefabInstance:
       propertyPath: m_FontData.m_Alignment
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 467876510378279797, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 467876510611722448, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 467876510472952184, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 467876510715449628, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 467876511475782442, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2889036209635585395, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1733276296247530207, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7195234071077337773, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5083741926420545073, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340177574323414670, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077775719591907168, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444741702094371586, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_Text
+      value: Here you can see the functionality of your current pressed button
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e, type: 3}
+--- !u!1 &467876510640464420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5472397293848404871, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+    type: 3}
+  m_PrefabInstance: {fileID: 467876510640464419}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2863212489339096075
 PrefabInstance:
   m_ObjectHideFlags: 0
