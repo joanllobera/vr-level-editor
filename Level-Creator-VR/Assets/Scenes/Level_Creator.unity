@@ -403,6 +403,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: player_Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 4414461778605576755, guid: c58694168cd98b44e8bd703f5f8d62c9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4414461778605576750, guid: c58694168cd98b44e8bd703f5f8d62c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -656,7 +661,7 @@ PrefabInstance:
     - target: {fileID: 2863212489384232611, guid: 0219c046a5f81c54eafe175d32a25b26,
         type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2863212489384232615, guid: 0219c046a5f81c54eafe175d32a25b26,
         type: 3}
@@ -4031,6 +4036,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240275739315496690, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 467876511120016122, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
         type: 3}

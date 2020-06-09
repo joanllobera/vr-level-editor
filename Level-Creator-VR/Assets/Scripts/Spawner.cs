@@ -7,6 +7,8 @@ public class Spawner : MonoBehaviour
 {
     private bool spawnOnce;
     private bool deleteOnce;
+    private bool undoOnce;
+    private bool redoOnce;
     private bool delete;
     public bool gualdal;
     private bool hasPlayer;
@@ -43,7 +45,7 @@ public class Spawner : MonoBehaviour
         gualdal = false;
         levelLoader = GetComponent<LevelLoader>();
         urManager = GetComponent<UndoRedoManager>();
-
+        StartCoroutine(CheckPlayer());
         timeToSpawnInit = timeToSpawn;
         timeToSpawn= 0.0f;
         previousButtonIndex = 0;
@@ -52,11 +54,6 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(("lightHand", light));
-        Debug.Log(("cubeHand", cube));
-        Debug.Log(("player", player));
-        Debug.Log(("gapPresent", gapPresent));
-        Debug.Log(("gapPast", gapPast));
         if (cube)
         {
             cubeHand.SetActive(true);
@@ -155,16 +152,21 @@ public class Spawner : MonoBehaviour
                 {
                     foreach (GameObject cub in spawnedObjects)
                     {
-                        if (cub.transform.position == cubeHand.transform.position)
+                        if(cub.gameObject.tag != "Player")
                         {
-                            cub.SetActive(false);
-                            urManager.AddAction(new ModuleErase(cub), spawnedObjects);
-                            /*
-                            Destroy(cub);
-                            if (cub.gameObject.tag != "player")
+                            if(cub.transform.position == cubeHand.transform.position)
                             {
-                                spawnedObjects.Remove(cub);
-                            }*/
+                                cub.SetActive(false);
+                                urManager.AddAction(new ModuleErase(cub), spawnedObjects);
+                            }
+                        }
+                        else
+                        {
+                            if(Vector3.Distance(cub.transform.position, cubeHand.transform.position) <= 0.5f)
+                            {
+                                cub.SetActive(false);
+                                urManager.AddAction(new ModuleErase(cub), spawnedObjects);
+                            }
                         }
                     }
                 }
@@ -240,7 +242,7 @@ public class Spawner : MonoBehaviour
                         {
                             GameObject g = Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation);
                             spawnedObjects.Add(g);
-                            spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
+                            //spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
                             timeToSpawn = timeToSpawnInit; //reseteamos la cadencia
                             urManager.AddAction(new ModuleCreate(g), spawnedObjects);
                         }
@@ -569,14 +571,18 @@ public class Spawner : MonoBehaviour
             {
                 selectionText[3].GetComponent<Text>().color = Color.black;
             }
-            if (hit.transform.tag == "undo" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            if (hit.transform.tag == "undo" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f/* && !undoOnce*/)
             {
                 urManager.Undo();
-
+                undoOnce = true;
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[3].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 3;
+            }
+            else if(Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.3f && undoOnce)
+            {
+                undoOnce = false;
             }
 
             // Redo
@@ -588,14 +594,18 @@ public class Spawner : MonoBehaviour
             {
                 selectionText[7].GetComponent<Text>().color = Color.black;
             }
-            if (hit.transform.tag == "redo" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            if (hit.transform.tag == "redo" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f /*&& !redoOnce*/)
             {
                 urManager.Redo();
-
+                redoOnce = true;
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[7].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 7;
+            }
+            else if (Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.3f && redoOnce)
+            {
+                redoOnce = false;
             }
 
             // Play
@@ -765,5 +775,23 @@ public class Spawner : MonoBehaviour
             }
         }
         
+    }
+
+    IEnumerator CheckPlayer()
+    {
+        while(true)
+        {
+            if (GameObject.FindGameObjectWithTag("Player") == null)
+            {
+                hasPlayer = false;
+            }
+            else
+            {
+                hasPlayer = true;
+            }
+            Debug.Log(hasPlayer);
+            yield return new WaitForSeconds(0.2f);
+        }
+
     }
 }
