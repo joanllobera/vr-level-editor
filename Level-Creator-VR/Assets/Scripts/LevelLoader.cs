@@ -23,6 +23,9 @@ public class LevelLoader : MonoBehaviour
         public List<SaveObject> players = new List<SaveObject>();
         public List<SaveObject> lights = new List<SaveObject>();
         public List<SaveObject> cubes = new List<SaveObject>();
+        public List<SaveObject> checkpoints = new List<SaveObject>();
+        public List<SaveObject> goals = new List<SaveObject>();
+        public List<SaveObject> rotators = new List<SaveObject>();
     }
     LevelData data = new LevelData();
 
@@ -39,6 +42,7 @@ public class LevelLoader : MonoBehaviour
         leftHand = GameObject.Find("LeftControllerAnchor");
         loadCanvas.SetActive(false);
         saveCanvas.SetActive(false);
+        LoadSave(Application.dataPath + "/save1.txt");
     }
 
     void LateUpdate()
@@ -69,6 +73,9 @@ public class LevelLoader : MonoBehaviour
         data.cubes.Clear();
         data.players.Clear();
         data.lights.Clear();
+        data.checkpoints.Clear();
+        data.goals.Clear();
+        data.rotators.Clear();
 
         // Cubes
         GameObject[] cubes = GameObject.FindGameObjectsWithTag("cube");
@@ -100,9 +107,6 @@ public class LevelLoader : MonoBehaviour
     {
         loadCanvas.SetActive(true);
         mainMenu.SetActive(false);
-
-        //// We load the saves' names.
-        //string[] files = System.IO.Directory.GetFiles(Application.dataPath, "*.txt");
     }
 
     public void OpenSaveCanvas() 
@@ -149,7 +153,7 @@ public class LevelLoader : MonoBehaviour
             foreach (SaveObject c in data.cubes)
             {
                 // We spawn the cubes
-                GameObject g = (GameObject)Instantiate(Resources.Load("Cube"));
+                GameObject g = (GameObject)Instantiate(Resources.Load("Cube_Spawned"));
                 g.transform.SetPositionAndRotation(c.pos, c.rot);
                 g.transform.localScale = c.scale;
                 g.SetActive(true);
