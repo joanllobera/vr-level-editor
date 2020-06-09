@@ -33,6 +33,9 @@ TagManager:
   - Portal
   - gappast
   - gappresent
+  - gap
+  - present
+  - past
   layers:
   - Default
   - TransparentFX

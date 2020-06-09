@@ -16,8 +16,10 @@ public class Spawner : MonoBehaviour
     public GameObject leftHand;
     public GameObject lightPrefab;
     public GameObject playerPrefab;
+    public GameObject gapPastPrefab;
+    public GameObject gapPresentPrefab;
     public GameObject axisRotatorPrefab;
-    public GameObject cubeHand, lightHand, playerHand, checkpointHand, finishHand, axisRotatorHand;
+    public GameObject cubeHand, lightHand, playerHand, checkpointHand, finishHand, axisRotatorHand, gapPastHand, gapPresentHand;
     public GameObject testObject;
     public GameObject cam;
     public Material cubeMat;
@@ -27,7 +29,7 @@ public class Spawner : MonoBehaviour
 
     public float timeToSpawn;
     float timeToSpawnInit;
-    public bool cube, light, player, checkpoint, finish, axisRotator;
+    public bool cube, light, player, checkpoint, finish, axisRotator, gapPast, gapPresent;
 
     public LevelLoader levelLoader;
     public UndoRedoManager urManager;
@@ -50,6 +52,11 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(("lightHand", light));
+        Debug.Log(("cubeHand", cube));
+        Debug.Log(("player", player));
+        Debug.Log(("gapPresent", gapPresent));
+        Debug.Log(("gapPast", gapPast));
         if (cube)
         {
             cubeHand.SetActive(true);
@@ -58,6 +65,8 @@ public class Spawner : MonoBehaviour
             checkpointHand.SetActive(false);
             finishHand.SetActive(false);
             axisRotatorHand.SetActive(false);
+            gapPastHand.SetActive(false);
+            gapPresentHand.SetActive(false);
         }
         else if (light)
         {
@@ -67,6 +76,8 @@ public class Spawner : MonoBehaviour
             checkpointHand.SetActive(false);
             finishHand.SetActive(false);
             axisRotatorHand.SetActive(false);
+            gapPastHand.SetActive(false);
+            gapPresentHand.SetActive(false);
         }
         else if (player)
         {
@@ -76,6 +87,8 @@ public class Spawner : MonoBehaviour
             checkpointHand.SetActive(false);
             finishHand.SetActive(false);
             axisRotatorHand.SetActive(false);
+            gapPastHand.SetActive(false);
+            gapPresentHand.SetActive(false);
         }
         else if (checkpoint) 
         {
@@ -85,6 +98,8 @@ public class Spawner : MonoBehaviour
             checkpointHand.SetActive(true);
             finishHand.SetActive(false);
             axisRotatorHand.SetActive(false);
+            gapPastHand.SetActive(false);
+            gapPresentHand.SetActive(false);
         }
         else if (finish) 
         {
@@ -94,6 +109,8 @@ public class Spawner : MonoBehaviour
             checkpointHand.SetActive(false);
             finishHand.SetActive(true);
             axisRotatorHand.SetActive(false);
+            gapPastHand.SetActive(false);
+            gapPresentHand.SetActive(false);
         }
         else if (axisRotator) 
         {
@@ -103,8 +120,31 @@ public class Spawner : MonoBehaviour
             checkpointHand.SetActive(false);
             finishHand.SetActive(false);
             axisRotatorHand.SetActive(true);
+            gapPastHand.SetActive(false);
+            gapPresentHand.SetActive(false);
         }
-
+        else if (gapPresent)
+        {
+            cubeHand.SetActive(false);
+            lightHand.SetActive(false);
+            playerHand.SetActive(false);
+            checkpointHand.SetActive(false);
+            finishHand.SetActive(false);
+            axisRotatorHand.SetActive(false);
+            gapPastHand.SetActive(false);
+            gapPresentHand.SetActive(true);
+        }
+        else if (gapPast)
+        {
+            cubeHand.SetActive(false);
+            lightHand.SetActive(false);
+            playerHand.SetActive(false);
+            checkpointHand.SetActive(false);
+            finishHand.SetActive(false);
+            axisRotatorHand.SetActive(false);
+            gapPastHand.SetActive(true);
+            gapPresentHand.SetActive(false);
+        }
 
         if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") > 0.3f && !spawnOnce)
         {
@@ -219,6 +259,20 @@ public class Spawner : MonoBehaviour
                 spawnedObjects.Add(g);
                 spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
                  spawnOnce = true;
+                urManager.AddAction(new ModuleCreate(g), spawnedObjects);
+            }
+            else if(gapPast)
+            {
+                GameObject g = Instantiate(gapPastPrefab, gapPastHand.transform.position, gapPastHand.transform.rotation);
+                spawnedObjects.Add(g);                
+                spawnOnce = true;
+                urManager.AddAction(new ModuleCreate(g), spawnedObjects);
+            }
+            else if(gapPresent)
+            {
+                GameObject g = Instantiate(gapPresentPrefab, gapPresentHand.transform.position, gapPresentHand.transform.rotation);
+                spawnedObjects.Add(g);
+                spawnOnce = true;
                 urManager.AddAction(new ModuleCreate(g), spawnedObjects);
             }
             else if(player && !hasPlayer)
@@ -364,6 +418,8 @@ public class Spawner : MonoBehaviour
                 checkpoint = false;
                 finish = false;
                 axisRotator = false;
+                gapPast = false;
+                gapPresent = false;
 
                 /*for(int i = 0; i < selectionText.Count; i++)
                 {
@@ -392,6 +448,8 @@ public class Spawner : MonoBehaviour
                 checkpoint = false;
                 finish = false;
                 axisRotator = false;
+                gapPast = false;
+                gapPresent = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -415,6 +473,8 @@ public class Spawner : MonoBehaviour
                 player = true;
                 axisRotator = false;
                 finish = false;
+                gapPast = false;
+                gapPresent = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -439,6 +499,8 @@ public class Spawner : MonoBehaviour
                 checkpoint = true;
                 finish = false;
                 axisRotator = false;
+                gapPast = false;
+                gapPresent = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -463,6 +525,8 @@ public class Spawner : MonoBehaviour
                 checkpoint = false;
                 finish = true;
                 axisRotator = false;
+                gapPast = false;
+                gapPresent = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -487,6 +551,8 @@ public class Spawner : MonoBehaviour
                 checkpoint = false;
                 finish = false;
                 axisRotator = true;
+                gapPast = false;
+                gapPresent = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -548,10 +614,68 @@ public class Spawner : MonoBehaviour
                     playerObj.GetComponent<Movement>().Activate();
                 }
 
+                GameObject[] gaps = GameObject.FindGameObjectsWithTag("gap");
+                foreach (GameObject gap in gaps)
+                {
+                    gap.GetComponent<OverlapCheck>().GetLight();
+                }
+
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[8].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 8;
+            }
+
+            //GapPast
+            if (hit.transform.tag == "gappast")
+            {
+                selectionText[13].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[13].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "gappast" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                cube = false;
+                light = false;
+                player = false;
+                checkpoint = false;
+                finish = false;
+                axisRotator = false;
+                gapPast = true;
+                gapPresent = false;
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[8].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 13;
+            }
+
+            //GapPresent
+            if (hit.transform.tag == "gappresent")
+            {
+                selectionText[14].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[14].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "gappresent" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                cube = false;
+                light = false;
+                player = false;
+                checkpoint = false;
+                finish = false;
+                axisRotator = false;
+                gapPast = false;
+                gapPresent = true;
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[4].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 14;
             }
 
             // Remove Player
