@@ -7,25 +7,27 @@ using System.IO;
 public class LevelLoader : MonoBehaviour
 {
     [Serializable]
-    public class SaveObject 
+    public class SaveObject
     {
         public Vector3 pos, scale;
         public Quaternion rot;
-        public SaveObject(Vector3 p, Quaternion r, Vector3 s) 
+        public SaveObject(Vector3 p, Quaternion r, Vector3 s)
         {
             pos = p; scale = s; rot = r;
         }
     }
 
     [Serializable]
-    public class LevelData 
+    public class LevelData
     {
         public List<SaveObject> players = new List<SaveObject>();
         public List<SaveObject> lights = new List<SaveObject>();
         public List<SaveObject> cubes = new List<SaveObject>();
+        public List<SaveObject> past = new List<SaveObject>();
+        public List<SaveObject> present = new List<SaveObject>();
         public List<SaveObject> checkpoints = new List<SaveObject>();
-        public List<SaveObject> goals = new List<SaveObject>();
         public List<SaveObject> rotators = new List<SaveObject>();
+        public List<SaveObject> portals = new List<SaveObject>();
     }
     LevelData data = new LevelData();
 
@@ -51,16 +53,16 @@ public class LevelLoader : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(leftHand.transform.position, leftHand.transform.forward, out hit, 30) && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
         {
-            if (hit.transform.tag == "backButton") 
+            if (hit.transform.tag == "backButton")
             {
                 Back();
             }
-            if(hit.transform.tag == "saveSlot") 
+            if (hit.transform.tag == "saveSlot")
             {
                 SaveSlot ss = hit.transform.gameObject.GetComponent<SaveSlot>();
                 Save(ss.slotNum);
             }
-            if(hit.transform.tag == "loadSlot") 
+            if (hit.transform.tag == "loadSlot")
             {
                 LoadSlot ls = hit.transform.gameObject.GetComponent<LoadSlot>();
                 LoadSave(Application.dataPath + "/save" + ls.slotNum + ".txt");
@@ -68,19 +70,18 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    public void Save(int n) 
+    public void Save(int n)
     {
         // We save the cube's transform
         data.cubes.Clear();
         data.players.Clear();
         data.lights.Clear();
         data.checkpoints.Clear();
-        data.goals.Clear();
         data.rotators.Clear();
 
         // Cubes
         GameObject[] cubes = GameObject.FindGameObjectsWithTag("cube");
-        foreach(GameObject c in cubes)
+        foreach (GameObject c in cubes)
         {
             data.cubes.Add(new SaveObject(c.transform.position, c.transform.rotation, c.transform.localScale));
         }
@@ -99,8 +100,36 @@ public class LevelLoader : MonoBehaviour
             data.players.Add(new SaveObject(p.transform.position, p.transform.rotation, p.transform.localScale));
         }
 
+        // Past
+        GameObject[] past = GameObject.FindGameObjectsWithTag("gap");
+        foreach (GameObject p in past)
+        {
+            data.past.Add(new SaveObject(p.transform.position, p.transform.rotation, p.transform.localScale));
+        }
+
+        // Present
+        GameObject[] present = GameObject.FindGameObjectsWithTag("gapp");
+        foreach (GameObject p in present)
+        {
+            data.present.Add(new SaveObject(p.transform.position, p.transform.rotation, p.transform.localScale));
+        }
+
+        // Rotator
+        GameObject[] rotators = GameObject.FindGameObjectsWithTag("rotator");
+        foreach (GameObject p in rotators)
+        {
+            data.rotators.Add(new SaveObject(p.transform.position, p.transform.rotation, p.transform.localScale));
+        }
+
+        // Portals
+        GameObject[] portals = GameObject.FindGameObjectsWithTag("Portals");
+        foreach (GameObject p in portals)
+        {
+            data.portals.Add(new SaveObject(p.transform.position, p.transform.rotation, p.transform.localScale));
+        }
+
         // We save the data in the json
-        string json = JsonUtility.ToJson(data);        
+        string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.dataPath + "/save" + n + ".txt", json);
     }
 
@@ -110,20 +139,20 @@ public class LevelLoader : MonoBehaviour
         mainMenu.SetActive(false);
     }
 
-    public void OpenSaveCanvas() 
+    public void OpenSaveCanvas()
     {
         saveCanvas.SetActive(true);
         mainMenu.SetActive(false);
     }
 
-    public void Back() 
+    public void Back()
     {
         loadCanvas.SetActive(false);
         saveCanvas.SetActive(false);
         mainMenu.SetActive(true);
     }
 
-    public void LoadSave(string name) 
+    public void LoadSave(string name)
     {
         if (File.Exists(name))
         {
@@ -155,6 +184,46 @@ public class LevelLoader : MonoBehaviour
             {
                 // We spawn the cubes
                 GameObject g = (GameObject)Instantiate(Resources.Load("Cube_Spawned"));
+                g.transform.SetPositionAndRotation(c.pos, c.rot);
+                g.transform.localScale = c.scale;
+                g.SetActive(true);
+            }
+
+            // Past
+            foreach (SaveObject c in data.past)
+            {
+                // We spawn the cubes
+                GameObject g = (GameObject)Instantiate(Resources.Load("prefab-gap-past"));
+                g.transform.SetPositionAndRotation(c.pos, c.rot);
+                g.transform.localScale = c.scale;
+                g.SetActive(true);
+            }
+
+            // Present
+            foreach (SaveObject c in data.present)
+            {
+                // We spawn the cubes
+                GameObject g = (GameObject)Instantiate(Resources.Load("prefab-gap-present"));
+                g.transform.SetPositionAndRotation(c.pos, c.rot);
+                g.transform.localScale = c.scale;
+                g.SetActive(true);
+            }
+
+            // Portals
+            foreach (SaveObject c in data.portals)
+            {
+                // We spawn the cubes
+                GameObject g = (GameObject)Instantiate(Resources.Load("Portal"));
+                g.transform.SetPositionAndRotation(c.pos, c.rot);
+                g.transform.localScale = c.scale;
+                g.SetActive(true);
+            }
+
+            // Rotator
+            foreach (SaveObject c in data.rotators)
+            {
+                // We spawn the cubes
+                GameObject g = (GameObject)Instantiate(Resources.Load("Rotator"));
                 g.transform.SetPositionAndRotation(c.pos, c.rot);
                 g.transform.localScale = c.scale;
                 g.SetActive(true);

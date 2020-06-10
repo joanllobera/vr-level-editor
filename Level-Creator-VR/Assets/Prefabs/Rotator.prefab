@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 482904806209632785}
   m_Layer: 2
   m_Name: Rotator
-  m_TagString: Untagged
+  m_TagString: rotator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
