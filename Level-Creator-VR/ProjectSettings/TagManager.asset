@@ -41,6 +41,8 @@ TagManager:
   - present
   - past
   - nextTutorial
+  - Portals
+  - gapp
   layers:
   - Default
   - TransparentFX

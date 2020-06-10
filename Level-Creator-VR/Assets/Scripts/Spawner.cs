@@ -31,6 +31,8 @@ public class Spawner : MonoBehaviour
     public Material deleteMat;
     private bool secondPortal = false;
     private GameObject lastPortal;
+    private Quaternion initParentRot;
+    private bool playMode = false;
 
     public Color blueCol;
     public List<GameObject> selectionText = new List<GameObject>();
@@ -55,6 +57,7 @@ public class Spawner : MonoBehaviour
     public Sprite defaultIMG, characterIMG, cubeIMG, pastCubeIMG, futureCubeIMG, lightIMG, rotatorIMG;
     void Start()
     {
+        initParentRot = levelParent.transform.rotation;
         delete = false;
         cube = true;
         gualdal = false;
@@ -376,6 +379,7 @@ public class Spawner : MonoBehaviour
                     GameObject playerObject = Instantiate(playerPrefab, playerHand.transform.position, playerHand.GetComponent<Player_Hand_Behaviour>().rotation);
                     spawnedObjects.Add(playerObject);
                     urManager.AddAction(new ModuleCreate(playerObject), spawnedObjects);
+                    spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;
                     playerObj = playerObject;
                     hasPlayer = true;
                     //spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
@@ -433,6 +437,7 @@ public class Spawner : MonoBehaviour
                     {
                         GameObject axisRot = Instantiate(axisRotatorPrefab, axisRotatorHand.transform.position, lightHand.transform.rotation);
                         spawnedObjects.Add(axisRot);
+                        spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;
                         urManager.AddAction(new ModuleCreate(axisRot), spawnedObjects);
                         spawnOnce = true;
                     }
@@ -442,6 +447,7 @@ public class Spawner : MonoBehaviour
                     GameObject portalObj = Instantiate(portalPrefab, portalHand.transform.position, portalHand.transform.rotation);
                     portalObj.GetComponent<PortalSingle>().camera = cam;
                     spawnedObjects.Add(portalObj);
+                    spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;
                     urManager.AddAction(new ModuleCreate(portalObj), spawnedObjects);
                     spawnOnce = true;
                     if(secondPortal)
@@ -507,15 +513,18 @@ public class Spawner : MonoBehaviour
             canvas.transform.LookAt(2 * canvas.transform.position - cam.transform.position);
         }
 
-        
-    if(Input.GetAxis("Oculus_GearVR_LThumbstickX") > 0.5)
-    {
-        levelParent.transform.Rotate(Vector3.up * (rotLightSpeed));
-    }
-    else if(Input.GetAxis("Oculus_GearVR_LThumbstickX") < -0.5)
-    {
-        levelParent.transform.Rotate(Vector3.up * (-rotLightSpeed));
-    }
+    if(playMode)
+        {
+            if (Input.GetAxis("Oculus_GearVR_LThumbstickX") > 0.5)
+            {
+                levelParent.transform.Rotate(Vector3.up * (rotLightSpeed));
+            }
+            else if (Input.GetAxis("Oculus_GearVR_LThumbstickX") < -0.5)
+            {
+                levelParent.transform.Rotate(Vector3.up * (-rotLightSpeed));
+            }
+        }
+    
 
     }
 
@@ -788,6 +797,7 @@ public class Spawner : MonoBehaviour
                 if(hasPlayer)
                 {
                     playerObj.GetComponent<Movement>().Activate();
+                    playMode = true;
                 }
 
                 GameObject[] gaps = GameObject.FindGameObjectsWithTag("gap");
@@ -1022,6 +1032,9 @@ public class Spawner : MonoBehaviour
                 if (hasPlayer)
                 {
                     playerObj.GetComponent<Movement>().Deactivate();
+                    playMode = false;
+                    levelParent.transform.rotation = initParentRot;
+                    playerObj.GetComponent<Movement>().ResetPos();
                 }
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
@@ -1113,6 +1126,8 @@ public class Spawner : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("Player") == null)
             {
                 hasPlayer = false;
+                playMode = false;
+                levelParent.transform.rotation = initParentRot;
             }
             else
             {

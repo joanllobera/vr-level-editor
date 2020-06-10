@@ -60,15 +60,15 @@ public class PortalSingle : MonoBehaviour
             if (active && !onCooldown)
             {
                 Vector3 targetPos = targetPortal.transform.position;
-                targetPos.y = other.gameObject.transform.position.y;
+                //targetPos.y = other.gameObject.transform.position.y;
                 other.gameObject.transform.Rotate(targetRotation, Space.Self);
                 other.gameObject.transform.position = targetPos;
-                RaycastHit hit;
+                /*RaycastHit hit;
                 if (Physics.Raycast(targetPortal.transform.position, -other.gameObject.transform.up, out hit, 20f, LayerMask.GetMask("Floor")))
                 {
                     targetPos.y = hit.point.y + (other.gameObject.transform.localScale.y * other.gameObject.transform.up.y);
                     other.gameObject.transform.position = targetPos;
-                }
+                }*/
                 PortalCooldown();
                 targetPortal.GetComponent<PortalSingle>().PortalCooldown();
             }
