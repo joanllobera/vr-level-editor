@@ -45,7 +45,7 @@ public class LevelLoader : MonoBehaviour
         loadCanvas.SetActive(false);
         saveCanvas.SetActive(false);
         //Save(1);
-        LoadSave(Application.dataPath + "/save1.txt");
+        //LoadSave(Application.dataPath + "/save1.txt");
     }
 
     void LateUpdate()
@@ -126,6 +126,13 @@ public class LevelLoader : MonoBehaviour
         foreach (GameObject p in portals)
         {
             data.portals.Add(new SaveObject(p.transform.position, p.transform.rotation, p.transform.localScale));
+        }
+
+        // Checkpoints
+        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("checkpoint");
+        foreach (GameObject p in checkpoints)
+        {
+            data.checkpoints.Add(new SaveObject(p.transform.position, p.transform.rotation, p.transform.localScale));
         }
 
         // We save the data in the json
@@ -225,6 +232,16 @@ public class LevelLoader : MonoBehaviour
             {
                 // We spawn the cubes
                 GameObject g = (GameObject)Instantiate(Resources.Load("Rotator"));
+                g.transform.SetPositionAndRotation(c.pos, c.rot);
+                g.transform.localScale = c.scale;
+                g.SetActive(true);
+            }
+
+            // Checkpoints
+            foreach (SaveObject c in data.checkpoints) 
+            {
+                // We spawn the cubes
+                GameObject g = (GameObject)Instantiate(Resources.Load("Checkpoint"));
                 g.transform.SetPositionAndRotation(c.pos, c.rot);
                 g.transform.localScale = c.scale;
                 g.SetActive(true);
