@@ -209,6 +209,11 @@ public class Movement : MonoBehaviour
         alive = true;
     }
 
+    public void SetInitialValues(Transform initPos)
+    {
+        initialPos = initPos.position;
+    }
+
     public void Deactivate()
     {
         alive = false;
