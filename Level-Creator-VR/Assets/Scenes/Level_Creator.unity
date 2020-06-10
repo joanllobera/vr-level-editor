@@ -726,7 +726,7 @@ PrefabInstance:
     - target: {fileID: 4414461778605576755, guid: c58694168cd98b44e8bd703f5f8d62c9,
         type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4414461778605576750, guid: c58694168cd98b44e8bd703f5f8d62c9,
         type: 3}
@@ -1000,7 +1000,7 @@ PrefabInstance:
     - target: {fileID: 2863212489384232611, guid: a3b6e37f7d6d5a34ebacbf591132b2e4,
         type: 3}
       propertyPath: m_TagString
-      value: gapp
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2863212489384232611, guid: a3b6e37f7d6d5a34ebacbf591132b2e4,
         type: 3}
@@ -1559,7 +1559,7 @@ PrefabInstance:
     - target: {fileID: 2863212489384232611, guid: a3b6e37f7d6d5a34ebacbf591132b2e4,
         type: 3}
       propertyPath: m_TagString
-      value: Portals
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2863212489384232611, guid: a3b6e37f7d6d5a34ebacbf591132b2e4,
         type: 3}
@@ -2333,7 +2333,7 @@ PrefabInstance:
     - target: {fileID: 2863212489384232611, guid: 4385bbaf6d8d75c4baa1597326b5935d,
         type: 3}
       propertyPath: m_TagString
-      value: light
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2863212489384232611, guid: 4385bbaf6d8d75c4baa1597326b5935d,
         type: 3}
@@ -3295,7 +3295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gualdal: 0
   spawnedObjects: []
-  cubePrefab: {fileID: 2863212489384232611, guid: d063fc4f886ef134f97925a5040c89be,
+  cubePrefab: {fileID: 2863212489384232611, guid: 441348ca5b489cc46922e6da92a346ed,
     type: 3}
   leftHand: {fileID: 65146536}
   lightPrefab: {fileID: 2863212489384232611, guid: ed3c7a92c6353d2458b02ee7b4cf19ec,
@@ -5496,7 +5496,7 @@ PrefabInstance:
     - target: {fileID: 2863212489384232611, guid: a3b6e37f7d6d5a34ebacbf591132b2e4,
         type: 3}
       propertyPath: m_TagString
-      value: gap
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2863212489384232611, guid: a3b6e37f7d6d5a34ebacbf591132b2e4,
         type: 3}
@@ -6137,7 +6137,7 @@ PrefabInstance:
     - target: {fileID: 2863212489384232611, guid: a3b6e37f7d6d5a34ebacbf591132b2e4,
         type: 3}
       propertyPath: m_TagString
-      value: rotator
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2863212489384232611, guid: a3b6e37f7d6d5a34ebacbf591132b2e4,
         type: 3}
@@ -7930,7 +7930,7 @@ PrefabInstance:
     - target: {fileID: 2863212489384232611, guid: a3b6e37f7d6d5a34ebacbf591132b2e4,
         type: 3}
       propertyPath: m_TagString
-      value: cube
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2863212489384232611, guid: a3b6e37f7d6d5a34ebacbf591132b2e4,
         type: 3}

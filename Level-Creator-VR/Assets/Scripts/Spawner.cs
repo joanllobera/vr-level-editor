@@ -1030,11 +1030,11 @@ public class Spawner : MonoBehaviour
             if (hit.transform.tag == "stop" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
                 if (hasPlayer)
-                {
-                    playerObj.GetComponent<Movement>().Deactivate();
+                {                    
                     playMode = false;
                     levelParent.transform.rotation = initParentRot;
                     playerObj.GetComponent<Movement>().ResetPos();
+                    playerObj.GetComponent<Movement>().Deactivate();
                 }
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
