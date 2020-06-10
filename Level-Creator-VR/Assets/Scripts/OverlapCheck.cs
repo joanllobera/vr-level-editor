@@ -33,15 +33,17 @@ public class OverlapCheck : MonoBehaviour
         //Compute ray directions
         if(lightSource != null)
         {
-            cameraPos = lightSource.transform.position;
+            cameraPos = lightSource.transform.forward;
+            cameraPos.Normalize();
+            cameraPos *= 100;
 
             Bounds bounds = mesh.bounds;
             pointA = transform.TransformPoint(bounds.size.x / 2, 0, 0);
             pointB = transform.TransformPoint(-bounds.size.x / 2, 0, 0);
             pointC = transform.TransformPoint(0, 0, 0);
-            dirA = cameraPos - pointA;
-            dirB = cameraPos - pointB;
-            dirC = cameraPos - pointC;
+            dirA = pointA - cameraPos;
+            dirB = pointB - cameraPos;
+            dirC = pointC - cameraPos;
             Debug.DrawRay(pointA, dirA, Color.green);
             Debug.DrawRay(pointB, dirB, Color.green);
             Debug.DrawRay(pointC, dirC, Color.green);

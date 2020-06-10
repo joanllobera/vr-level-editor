@@ -27,18 +27,18 @@ public class Spawner : MonoBehaviour
     public Material cubeMat;
     public GameObject canvas;
     public Material deleteMat;
+
+    public Color blueCol;
     public List<GameObject> selectionText = new List<GameObject>();
 
     public GameObject tooltipText;
 
     public float timeToSpawn;
-    float timeToSpawnInit;
     public bool cube, light, player, checkpoint, finish, axisRotator, gapPast, gapPresent;
     private GameObject directionalLight; //para tener una referencia directa a la luz
 
-    public GameObject levelParent, lightCanvas;
+    public GameObject levelParent, lightCanvas, canvasImage;
     public float timeToSpawnInit, rotLightSpeed;
-    public bool cube, light, player, checkpoint, finish, axisRotator;
 
     public LevelLoader levelLoader;
     public UndoRedoManager urManager;
@@ -81,12 +81,13 @@ public class Spawner : MonoBehaviour
         mobileHelp = "Mobile View - Swap to mobile view";
         removeCharacterHelp = "Remove Character - Removes the character from the current level";
 
-
+        cubeHand.transform.parent = levelParent.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+
 
         if (cube)
         {
@@ -184,6 +185,7 @@ public class Spawner : MonoBehaviour
             {
                 if(delete)
                 {
+                    
                     foreach (GameObject cub in spawnedObjects)
                     {
                         if(cub.gameObject.tag != "Player")
@@ -206,6 +208,7 @@ public class Spawner : MonoBehaviour
                 }
                 else
                 {
+
                     if(timeToSpawn <= 0.0f)
                     {
                         bool canSpawn = true;
@@ -296,14 +299,15 @@ public class Spawner : MonoBehaviour
                 spawnedObjects.Add(g);
                 lightCanvas.SetActive(true);
                 spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
-                spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;
-                 spawnOnce = true;
+
+                spawnOnce = true;
                 urManager.AddAction(new ModuleCreate(g), spawnedObjects);
             }
             else if(gapPast)
             {
                 GameObject g = Instantiate(gapPastPrefab, gapPastHand.transform.position, gapPastHand.transform.rotation);
-                spawnedObjects.Add(g);                
+                spawnedObjects.Add(g);  
+                 spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;              
                 spawnOnce = true;
                 urManager.AddAction(new ModuleCreate(g), spawnedObjects);
             }
@@ -311,6 +315,7 @@ public class Spawner : MonoBehaviour
             {
                 GameObject g = Instantiate(gapPresentPrefab, gapPresentHand.transform.position, gapPresentHand.transform.rotation);
                 spawnedObjects.Add(g);
+                 spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;
                 spawnOnce = true;
                 urManager.AddAction(new ModuleCreate(g), spawnedObjects);
             }
@@ -395,6 +400,7 @@ public class Spawner : MonoBehaviour
         {
             delete = true;
             cubeHand.GetComponent<MeshRenderer>().material = deleteMat;
+            canvasImage.GetComponent<Image>().color = Color.red;
             deleteOnce = true;
             if(cube)
             {
@@ -413,9 +419,11 @@ public class Spawner : MonoBehaviour
         }
         else
         {
+
             if (Input.GetAxis("Oculus_CrossPlatform_SecondaryHandTrigger") < 0.3f)
             {
                 cubeHand.GetComponent<MeshRenderer>().material = cubeMat;
+                canvasImage.GetComponent<Image>().color = blueCol;
                 delete = false;
             }
         }
@@ -436,13 +444,6 @@ public class Spawner : MonoBehaviour
         levelParent.transform.Rotate(Vector3.up * (-rotLightSpeed));
     }
 
-        /*foreach(GameObject g in spawnedObjects)
-        {
-            if(Vector3.Distance(testObject.transform.position, g.transform.position) <= 1)
-            {
-                
-            }
-        }*/
     }
 
     void LateUpdate()
@@ -796,11 +797,11 @@ public class Spawner : MonoBehaviour
              //Rotate Light
             if(hit.transform.tag == "decreaseX") 
             {
-                selectionText[11].GetComponent<Text>().color = Color.white;
+                selectionText[15].GetComponent<Text>().color = Color.white;
             }
             else 
             {
-                selectionText[11].GetComponent<Text>().color = Color.black;
+                selectionText[15].GetComponent<Text>().color = Color.black;
             }
             if (hit.transform.tag == "decreaseX" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
@@ -809,11 +810,11 @@ public class Spawner : MonoBehaviour
 
             if(hit.transform.tag == "increaseX") 
             {
-                selectionText[12].GetComponent<Text>().color = Color.white;
+                selectionText[16].GetComponent<Text>().color = Color.white;
             }
             else 
             {
-                selectionText[12].GetComponent<Text>().color = Color.black;
+                selectionText[16].GetComponent<Text>().color = Color.black;
             }
             if (hit.transform.tag == "increaseX" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
@@ -822,11 +823,11 @@ public class Spawner : MonoBehaviour
 
             if(hit.transform.tag == "decreaseY") 
             {
-                selectionText[13].GetComponent<Text>().color = Color.white;
+                selectionText[17].GetComponent<Text>().color = Color.white;
             }
             else 
             {
-                selectionText[13].GetComponent<Text>().color = Color.black;
+                selectionText[17].GetComponent<Text>().color = Color.black;
             }
             if (hit.transform.tag == "decreaseY" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
@@ -835,11 +836,11 @@ public class Spawner : MonoBehaviour
 
             if(hit.transform.tag == "increaseY") 
             {
-                selectionText[14].GetComponent<Text>().color = Color.white;
+                selectionText[18].GetComponent<Text>().color = Color.white;
             }
             else 
             {
-                selectionText[14].GetComponent<Text>().color = Color.black;
+                selectionText[18].GetComponent<Text>().color = Color.black;
             }
             if (hit.transform.tag == "increaseY" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
             {
