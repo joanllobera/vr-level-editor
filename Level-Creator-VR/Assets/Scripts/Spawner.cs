@@ -795,6 +795,11 @@ public class Spawner : MonoBehaviour
                 {
                     gap.GetComponent<OverlapCheck>().GetLight();
                 }
+                GameObject[] gaps2 = GameObject.FindGameObjectsWithTag("gapp");
+                foreach (GameObject gap in gaps2)
+                {
+                    gap.GetComponent<OverlapCheck>().GetLight();
+                }
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
