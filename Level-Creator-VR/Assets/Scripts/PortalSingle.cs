@@ -47,7 +47,7 @@ public class PortalSingle : MonoBehaviour
             else
             {
                 active = false;
-                targetPortal.GetComponent<PortalSingle>().Activate(false);
+                if(targetPortal!=null)targetPortal.GetComponent<PortalSingle>().Activate(false);
             }
             
         }
