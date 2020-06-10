@@ -40,6 +40,7 @@ TagManager:
   - gap
   - present
   - past
+  - nextTutorial
   layers:
   - Default
   - TransparentFX
