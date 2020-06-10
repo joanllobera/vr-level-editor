@@ -26,7 +26,10 @@ public class Spawner : MonoBehaviour
     public List<GameObject> selectionText = new List<GameObject>();
 
     public float timeToSpawn;
-    float timeToSpawnInit;
+    private GameObject directionalLight; //para tener una referencia directa a la luz
+
+    public GameObject levelParent, lightCanvas;
+    public float timeToSpawnInit, rotLightSpeed;
     public bool cube, light, player, checkpoint, finish, axisRotator;
 
     public LevelLoader levelLoader;
@@ -45,11 +48,17 @@ public class Spawner : MonoBehaviour
         timeToSpawnInit = timeToSpawn;
         timeToSpawn= 0.0f;
         previousButtonIndex = 0;
+
+          if(directionalLight != null)
+            lightCanvas.SetActive(true);
+        else
+            lightCanvas.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (cube)
         {
             cubeHand.SetActive(true);
@@ -200,7 +209,7 @@ public class Spawner : MonoBehaviour
                         {
                             GameObject g = Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation);
                             spawnedObjects.Add(g);
-                            spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
+                            spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;
                             timeToSpawn = timeToSpawnInit; //reseteamos la cadencia
                             urManager.AddAction(new ModuleCreate(g), spawnedObjects);
                         }
@@ -216,8 +225,11 @@ public class Spawner : MonoBehaviour
             else if(light)
             {
                 GameObject g = Instantiate(lightPrefab, lightHand.transform.position, lightHand.transform.rotation);
+                directionalLight = g;
                 spawnedObjects.Add(g);
+                lightCanvas.SetActive(true);
                 spawnedObjects[spawnedObjects.Count - 1].GetComponent<Cube_Hand_Behaviour>().enabled = false; //desactivo el script para que no siga a la mano
+                spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;
                  spawnOnce = true;
                 urManager.AddAction(new ModuleCreate(g), spawnedObjects);
             }
@@ -333,6 +345,15 @@ public class Spawner : MonoBehaviour
             canvas.transform.LookAt(2 * canvas.transform.position - cam.transform.position);
         }
 
+        
+    if(Input.GetAxis("Oculus_GearVR_LThumbstickX") > 0.5)
+    {
+        levelParent.transform.Rotate(Vector3.up * (rotLightSpeed));
+    }
+    else if(Input.GetAxis("Oculus_GearVR_LThumbstickX") < -0.5)
+    {
+        levelParent.transform.Rotate(Vector3.up * (-rotLightSpeed));
+    }
 
         /*foreach(GameObject g in spawnedObjects)
         {
@@ -575,6 +596,59 @@ public class Spawner : MonoBehaviour
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[11].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 previousButtonIndex = 11;
+            }
+
+             //Rotate Light
+            if(hit.transform.tag == "decreaseX") 
+            {
+                selectionText[11].GetComponent<Text>().color = Color.white;
+            }
+            else 
+            {
+                selectionText[11].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "decreaseX" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                directionalLight.transform.Rotate(Vector3.right * (-rotLightSpeed));
+            }
+
+            if(hit.transform.tag == "increaseX") 
+            {
+                selectionText[12].GetComponent<Text>().color = Color.white;
+            }
+            else 
+            {
+                selectionText[12].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "increaseX" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                directionalLight.transform.Rotate(Vector3.right * (rotLightSpeed));
+            }
+
+            if(hit.transform.tag == "decreaseY") 
+            {
+                selectionText[13].GetComponent<Text>().color = Color.white;
+            }
+            else 
+            {
+                selectionText[13].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "decreaseY" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                directionalLight.transform.Rotate(Vector3.up * (-rotLightSpeed));
+            }
+
+            if(hit.transform.tag == "increaseY") 
+            {
+                selectionText[14].GetComponent<Text>().color = Color.white;
+            }
+            else 
+            {
+                selectionText[14].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "increaseY" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                directionalLight.transform.Rotate(Vector3.up * (rotLightSpeed));
             }
 
             // Load

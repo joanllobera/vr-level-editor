@@ -30,6 +30,10 @@ TagManager:
   - User
   - RemovePlayer
   - stop
+  - decreaseX
+  - increaseX
+  - decreaseY
+  - increaseY
   layers:
   - Default
   - TransparentFX
