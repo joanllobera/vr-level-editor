@@ -38,13 +38,13 @@ public class PortalSingle : MonoBehaviour
                     active = true;
                     targetPortal.GetComponent<PortalSingle>().Activate(true);
                 }
-
+                else
+                {
+                    active = false;
+                    targetPortal.GetComponent<PortalSingle>().Activate(false);
+                }
             }
-            else
-            {
-                active = false;
-                targetPortal.GetComponent<PortalSingle>().Activate(false);
-            }
+            
         }
     }
 
