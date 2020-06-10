@@ -45,7 +45,7 @@ public class LevelLoader : MonoBehaviour
         loadCanvas.SetActive(false);
         saveCanvas.SetActive(false);
         //Save(1);
-        //LoadSave(Application.dataPath + "/save1.txt");
+        LoadSave(Application.dataPath + "/save1.txt");
     }
 
     void LateUpdate()
@@ -217,6 +217,7 @@ public class LevelLoader : MonoBehaviour
                 g.transform.SetPositionAndRotation(c.pos, c.rot);
                 g.transform.localScale = c.scale;
                 g.SetActive(true);
+                g.GetComponent<PortalSingle>().camera = GameObject.Find("CenterEyeAnchor");
             }
 
             // Rotator
