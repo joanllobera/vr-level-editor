@@ -61,11 +61,13 @@ public class LevelLoader : MonoBehaviour
             {
                 SaveSlot ss = hit.transform.gameObject.GetComponent<SaveSlot>();
                 Save(ss.slotNum);
+                Back();
             }
             if (hit.transform.tag == "loadSlot")
             {
                 LoadSlot ls = hit.transform.gameObject.GetComponent<LoadSlot>();
                 LoadSave(Application.dataPath + "/save" + ls.slotNum + ".txt");
+                Back();
             }
         }
     }
