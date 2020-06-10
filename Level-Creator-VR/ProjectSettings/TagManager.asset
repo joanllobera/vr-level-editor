@@ -45,6 +45,7 @@ TagManager:
   - gapp
   - rotator
   - checkpoint
+  - tutoButton
   layers:
   - Default
   - TransparentFX

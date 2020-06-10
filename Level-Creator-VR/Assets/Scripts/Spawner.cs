@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     private bool undoOnce;
     private bool redoOnce;
     private bool delete;
-    private bool nextOnce;
+    private bool nextOnce, tutoOnce;
     public bool gualdal;
     private bool hasPlayer;
     private GameObject playerObj;
@@ -1092,6 +1092,44 @@ public class Spawner : MonoBehaviour
                     nextOnce = false;
                 }
             }
+
+            // Redo tutorial
+            if (hit.transform.tag == "tutoButton")
+            {
+                selectionText[22].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[22].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "tutoButton" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f && !tutoOnce)
+            {
+                
+                canvas.GetComponentInChildren<tutorialManager>().restartTuto();
+                tutoOnce = true;
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[22].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 22;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                ///tooltipText.GetComponent<Text>().text = removeCharacterHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                ///helpImg.GetComponent<Image>().sprite = defaultIMG;
+            }
+            else if (hit.transform.tag == "tutoButton" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.3f && tutoOnce)
+            {
+                tutoOnce = false;
+            }
+            else
+            {
+                if(Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.3f && tutoOnce)
+                {
+                    tutoOnce = false;
+                }
+            }
+
+
 
             if (hit.transform.tag == "Portal")
             {
