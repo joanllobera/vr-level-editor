@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour
     private GameObject playerObj;
     public List<GameObject> spawnedObjects;
     public GameObject cubePrefab;
+    public GameObject checkpointPrefab;
     public GameObject leftHand;
     public GameObject lightPrefab;
     public GameObject playerPrefab;
@@ -361,6 +362,14 @@ public class Spawner : MonoBehaviour
                 else if (gapPast)
                 {
                     GameObject g = Instantiate(gapPastPrefab, gapPastHand.transform.position, gapPastHand.transform.rotation);
+                    spawnedObjects.Add(g);
+                    spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;
+                    spawnOnce = true;
+                    urManager.AddAction(new ModuleCreate(g), spawnedObjects);
+                }
+                else if (checkpoint)
+                {
+                    GameObject g = Instantiate(checkpointPrefab, checkpointHand.transform.position, checkpointHand.transform.rotation);
                     spawnedObjects.Add(g);
                     spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;
                     spawnOnce = true;
