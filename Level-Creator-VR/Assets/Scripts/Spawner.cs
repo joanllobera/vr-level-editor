@@ -47,6 +47,8 @@ public class Spawner : MonoBehaviour
 
     private string cubeHelp, pastCubeHelp, futureCubeHelp, dirLightHelp, checkPointHelp, characterHelp, undoHelp, redoHelp, portalHelp, axisRotatorHelp, playHelp, stopHelp, saveHelp, loadHelp, mobileHelp, removeCharacterHelp;
 
+    public GameObject helpImg;
+    public Sprite defaultIMG, characterIMG, cubeIMG, pastCubeIMG, futureCubeIMG, lightIMG, rotatorIMG;
     void Start()
     {
         delete = false;
@@ -80,6 +82,8 @@ public class Spawner : MonoBehaviour
         loadHelp = "Load - Load a saved level layout";
         mobileHelp = "Mobile View - Swap to mobile view";
         removeCharacterHelp = "Remove Character - Removes the character from the current level";
+
+        helpImg.GetComponent<Image>().sprite = defaultIMG;
 
         cubeHand.transform.parent = levelParent.transform;
     }
@@ -482,6 +486,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = cubeHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = cubeIMG;
             }
 
             if (hit.transform.tag == "activateLight")
@@ -510,6 +516,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = dirLightHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = lightIMG;
             }
 
             if (hit.transform.tag == "activatePlayer")
@@ -538,6 +546,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = characterHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = characterIMG;
             }
 
             // Checkpoint
@@ -567,6 +577,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = checkPointHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = defaultIMG;
             }
 
             // Finish
@@ -596,6 +608,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = cubeHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = defaultIMG;
             }
 
             // AxisRotator
@@ -625,6 +639,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = axisRotatorHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = rotatorIMG;
             }
 
             // Undo
@@ -647,6 +663,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = undoHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = defaultIMG;
             }
             else if(Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.3f && undoOnce)
             {
@@ -673,6 +691,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = redoHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = defaultIMG;
             }
             else if (Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.3f && redoOnce)
             {
@@ -708,6 +728,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = playHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = defaultIMG;
             }
 
             //GapPast
@@ -737,6 +759,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = pastCubeHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = pastCubeIMG;
             }
 
             //GapPresent
@@ -766,6 +790,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = futureCubeHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = futureCubeIMG;
             }
 
             // Remove Player
@@ -792,6 +818,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = removeCharacterHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = defaultIMG;
             }
 
              //Rotate Light
@@ -867,6 +895,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = loadHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = defaultIMG;
             }
 
             // Save
@@ -889,6 +919,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = saveHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = defaultIMG;
 
             }
             else if (Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.2f)
@@ -917,6 +949,8 @@ public class Spawner : MonoBehaviour
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = stopHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = defaultIMG;
             }
         }
         

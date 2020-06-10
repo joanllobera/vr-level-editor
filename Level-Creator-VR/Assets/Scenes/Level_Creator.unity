@@ -2851,6 +2851,14 @@ MonoBehaviour:
   rotLightSpeed: 0.7
   levelLoader: {fileID: 0}
   urManager: {fileID: 0}
+  helpImg: {fileID: 467876510640464421}
+  defaultIMG: {fileID: 21300000, guid: eb6d43eb36c494f4db4f69c13c204422, type: 3}
+  characterIMG: {fileID: 21300000, guid: c34613f817f33e044acdf37c915cceab, type: 3}
+  cubeIMG: {fileID: 21300000, guid: fb4b27a1726e7c34b84c60a75e7593a6, type: 3}
+  pastCubeIMG: {fileID: 21300000, guid: ca8dbf837d684fe449cd7f14b7dd43e1, type: 3}
+  futureCubeIMG: {fileID: 21300000, guid: c693e9eeb49bd8140a7aaa968697974e, type: 3}
+  lightIMG: {fileID: 21300000, guid: 58fa34c2ffb9597459ebb758f50f896c, type: 3}
+  rotatorIMG: {fileID: 21300000, guid: dd147f033122406419d49460d6c105c5, type: 3}
 --- !u!1 &963396815
 GameObject:
   m_ObjectHideFlags: 0
@@ -6478,7 +6486,7 @@ RectTransform:
   m_Children:
   - {fileID: 2050914541}
   m_Father: {fileID: 407576243}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7190,7 +7198,7 @@ PrefabInstance:
     - target: {fileID: 467876510472952184, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 467876510715449628, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
         type: 3}
@@ -7242,6 +7250,12 @@ PrefabInstance:
 --- !u!1 &467876510640464420 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5472397293848404871, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
+    type: 3}
+  m_PrefabInstance: {fileID: 467876510640464419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &467876510640464421 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3439165261622366304, guid: 64655a6942cf6ab4cb35d7e8f7f69f5e,
     type: 3}
   m_PrefabInstance: {fileID: 467876510640464419}
   m_PrefabAsset: {fileID: 0}
