@@ -39,7 +39,7 @@ public class tutorialManager : MonoBehaviour
         }
     }
 
-    void nextTutorial()
+    public void nextTutorial()
     {
         if(currentTutorrial < 4)
         {

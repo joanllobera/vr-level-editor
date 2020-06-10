@@ -572,22 +572,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7615415555680120233}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &910808723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910808722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77e85de708a89f4459bbd3e469f9d5ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPortal: {fileID: 1775817549}
-  targetRotation: {x: 0, y: 0, z: 0}
-  isObjective: 0
-  isHit: 0
 --- !u!4 &968567032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6338078359960943189, guid: 64347dbd12692af4da7905dee9f53cf8,
@@ -1380,16 +1364,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
-    - target: {fileID: 5572621575605311944, guid: 51434961f2cdd5f4998c886b2ba9c90c,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 5572621575605311944, guid: 51434961f2cdd5f4998c886b2ba9c90c,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 5572621575605311923, guid: 51434961f2cdd5f4998c886b2ba9c90c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1445,10 +1419,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2421765029047249939, guid: 51434961f2cdd5f4998c886b2ba9c90c,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 910808723, guid: 51434961f2cdd5f4998c886b2ba9c90c, type: 3}
+      propertyPath: targetPortal
+      value: 
+      objectReference: {fileID: 1775817549}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51434961f2cdd5f4998c886b2ba9c90c, type: 3}

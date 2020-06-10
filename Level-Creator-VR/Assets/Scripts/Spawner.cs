@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
     private bool undoOnce;
     private bool redoOnce;
     private bool delete;
+    private bool nextOnce;
     public bool gualdal;
     private bool hasPlayer;
     private GameObject playerObj;
@@ -21,12 +22,15 @@ public class Spawner : MonoBehaviour
     public GameObject gapPastPrefab;
     public GameObject gapPresentPrefab;
     public GameObject axisRotatorPrefab;
-    public GameObject cubeHand, lightHand, playerHand, checkpointHand, finishHand, axisRotatorHand, gapPastHand, gapPresentHand;
+    public GameObject portalPrefab;
+    public GameObject cubeHand, lightHand, playerHand, checkpointHand, finishHand, axisRotatorHand, gapPastHand, gapPresentHand, portalHand;
     public GameObject testObject;
     public GameObject cam;
     public Material cubeMat;
     public GameObject canvas;
     public Material deleteMat;
+    private bool secondPortal = false;
+    private GameObject lastPortal;
 
     public Color blueCol;
     public List<GameObject> selectionText = new List<GameObject>();
@@ -34,7 +38,7 @@ public class Spawner : MonoBehaviour
     public GameObject tooltipText;
 
     public float timeToSpawn;
-    public bool cube, light, player, checkpoint, finish, axisRotator, gapPast, gapPresent;
+    public bool cube, light, player, checkpoint, finish, axisRotator, gapPast, gapPresent, portal;
     private GameObject directionalLight; //para tener una referencia directa a la luz
 
     public GameObject levelParent, lightCanvas, canvasImage;
@@ -103,6 +107,7 @@ public class Spawner : MonoBehaviour
             axisRotatorHand.SetActive(false);
             gapPastHand.SetActive(false);
             gapPresentHand.SetActive(false);
+            portalHand.SetActive(false);
         }
         else if (light)
         {
@@ -114,6 +119,7 @@ public class Spawner : MonoBehaviour
             axisRotatorHand.SetActive(false);
             gapPastHand.SetActive(false);
             gapPresentHand.SetActive(false);
+            portalHand.SetActive(false);
         }
         else if (player)
         {
@@ -125,6 +131,7 @@ public class Spawner : MonoBehaviour
             axisRotatorHand.SetActive(false);
             gapPastHand.SetActive(false);
             gapPresentHand.SetActive(false);
+            portalHand.SetActive(false);
         }
         else if (checkpoint) 
         {
@@ -136,6 +143,7 @@ public class Spawner : MonoBehaviour
             axisRotatorHand.SetActive(false);
             gapPastHand.SetActive(false);
             gapPresentHand.SetActive(false);
+            portalHand.SetActive(false);
         }
         else if (finish) 
         {
@@ -147,6 +155,7 @@ public class Spawner : MonoBehaviour
             axisRotatorHand.SetActive(false);
             gapPastHand.SetActive(false);
             gapPresentHand.SetActive(false);
+            portalHand.SetActive(false);
         }
         else if (axisRotator) 
         {
@@ -158,6 +167,7 @@ public class Spawner : MonoBehaviour
             axisRotatorHand.SetActive(true);
             gapPastHand.SetActive(false);
             gapPresentHand.SetActive(false);
+            portalHand.SetActive(false);
         }
         else if (gapPresent)
         {
@@ -169,6 +179,7 @@ public class Spawner : MonoBehaviour
             axisRotatorHand.SetActive(false);
             gapPastHand.SetActive(false);
             gapPresentHand.SetActive(true);
+            portalHand.SetActive(false);
         }
         else if (gapPast)
         {
@@ -180,6 +191,7 @@ public class Spawner : MonoBehaviour
             axisRotatorHand.SetActive(false);
             gapPastHand.SetActive(true);
             gapPresentHand.SetActive(false);
+            portalHand.SetActive(false);
         }
         else if (cube)
         {
@@ -191,6 +203,19 @@ public class Spawner : MonoBehaviour
             axisRotatorHand.SetActive(false);
             gapPastHand.SetActive(false);
             gapPresentHand.SetActive(false);
+            portalHand.SetActive(false);
+        }
+        else if (portal)
+        {
+            cubeHand.SetActive(false);
+            lightHand.SetActive(false);
+            playerHand.SetActive(false);
+            checkpointHand.SetActive(false);
+            finishHand.SetActive(false);
+            axisRotatorHand.SetActive(false);
+            gapPastHand.SetActive(false);
+            gapPresentHand.SetActive(false);
+            portalHand.SetActive(true);
         }
 
         if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") > 0.3f && !spawnOnce)
@@ -199,7 +224,7 @@ public class Spawner : MonoBehaviour
             {
                 foreach (GameObject cub in spawnedObjects)
                 {
-                    if (cub.gameObject.tag != "Player")
+                    if (cub.gameObject.tag != "Player" && cub.gameObject.tag != "Portals")
                     {
                         if (cub.transform.position == cubeHand.transform.position)
                         {
@@ -207,7 +232,22 @@ public class Spawner : MonoBehaviour
                             urManager.AddAction(new ModuleErase(cub), spawnedObjects);
                         }
                     }
-                    else
+                    else if(cub.gameObject.tag == "Portals")
+                    {
+                        if (cub.transform.position == cubeHand.transform.position)
+                        {
+                            if (cub.GetComponent<PortalSingle>().targetPortal != null)
+                            {
+                                Destroy(cub.GetComponent<PortalSingle>().targetPortal);
+                                spawnedObjects.Remove(cub.GetComponent<PortalSingle>().targetPortal);
+                            }
+                            Destroy(cub.gameObject);
+                            spawnedObjects.Remove(cub.gameObject);
+                            lastPortal = null;
+                            secondPortal = false;
+                        }
+                    }
+                    else if(cub.gameObject.tag == "Player")
                     {
                         if (Vector3.Distance(cub.transform.position, cubeHand.transform.position) <= 0.5f)
                         {
@@ -221,90 +261,88 @@ public class Spawner : MonoBehaviour
             {
                 if (cube)
                 {
+                    if (timeToSpawn <= 0.0f)
                     {
-
-                        if (timeToSpawn <= 0.0f)
+                        bool canSpawn = true;
+                
+                        RaycastHit hit2;
+                        if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.forward), out hit2, 1.5f))
                         {
-                            bool canSpawn = true;
-
-                            RaycastHit hit2;
-                            if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.forward), out hit2, 1.5f))
+                            if (hit2.transform.tag == "cube")
                             {
-                                if (hit2.transform.tag == "cube")
+                                if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
                                 {
-                                    if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
-                                    {
-                                        canSpawn = false;
-                                    }
+                                    canSpawn = false;
                                 }
                             }
-                            if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.back), out hit2, 1.5f))
-                            {
-                                if (hit2.transform.tag == "cube")
-                                {
-                                    if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
-                                    {
-                                        canSpawn = false;
-                                    }
-                                }
-                            }
-                            if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.up), out hit2, 1.5f))
-                            {
-                                if (hit2.transform.tag == "cube")
-                                {
-                                    if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
-                                    {
-                                        canSpawn = false;
-                                    }
-                                }
-                            }
-                            if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.down), out hit2, 1.5f))
-                            {
-                                if (hit2.transform.tag == "cube")
-                                {
-                                    if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
-                                    {
-                                        canSpawn = false;
-                                    }
-                                }
-                            }
-                            if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.left), out hit2, 1.5f))
-                            {
-                                if (hit2.transform.tag == "cube")
-                                {
-                                    if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
-                                    {
-                                        canSpawn = false;
-                                    }
-                                }
-                            }
-                            if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.right), out hit2, 1.5f))
-                            {
-                                if (hit2.transform.tag == "cube")
-                                {
-                                    if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
-                                    {
-                                        canSpawn = false;
-                                    }
-                                }
-                            }
-
-                            if (canSpawn)
-                            {
-                                GameObject g = Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation);
-                                spawnedObjects.Add(g);
-                                spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;
-                                timeToSpawn = timeToSpawnInit; //reseteamos la cadencia
-                                urManager.AddAction(new ModuleCreate(g), spawnedObjects);
-                            }
-
                         }
-                        else
+                        if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.back), out hit2, 1.5f))
                         {
-                            timeToSpawn -= Time.deltaTime;
+                            if (hit2.transform.tag == "cube")
+                            {
+                                if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
+                                {
+                                    canSpawn = false;
+                                }
+                            }
                         }
-
+                        if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.up), out hit2, 1.5f))
+                        {
+                            if (hit2.transform.tag == "cube")
+                            {
+                                if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
+                                {
+                                    canSpawn = false;
+                                }
+                            }
+                        }
+                        if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.down), out hit2, 1.5f))
+                        {
+                            if (hit2.transform.tag == "cube")
+                            {
+                                if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
+                                {
+                                    canSpawn = false;
+                                }
+                            }
+                        }
+                        if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.left), out hit2, 1.5f))
+                        {
+                            if (hit2.transform.tag == "cube")
+                            {
+                                if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
+                                {
+                                    canSpawn = false;
+                                }
+                            }
+                        }
+                        if (Physics.Raycast(cubeHand.transform.position, cubeHand.transform.TransformDirection(Vector3.right), out hit2, 1.5f))
+                        {
+                            if (hit2.transform.tag == "cube")
+                            {
+                                if (hit2.transform.gameObject.GetComponent<BifurcationAvoider>().raycastCount > 1)
+                                {
+                                    canSpawn = false;
+                                }
+                            }
+                        }
+                
+                        if (canSpawn)
+                        {
+                            GameObject g = Instantiate(cubePrefab, cubeHand.transform.position, cubeHand.transform.rotation);
+                            spawnedObjects.Add(g);
+                            spawnedObjects[spawnedObjects.Count - 1].transform.parent = levelParent.transform;
+                            timeToSpawn = timeToSpawnInit; //reseteamos la cadencia
+                            urManager.AddAction(new ModuleCreate(g), spawnedObjects);
+                        }
+                
                     }
+                    else
+                    {
+                        timeToSpawn -= Time.deltaTime;
+                    }
+                
+                
                 }
                 else if (light)
                 {
@@ -399,6 +437,25 @@ public class Spawner : MonoBehaviour
                         spawnOnce = true;
                     }
                 }
+                else if(portal)
+                {
+                    GameObject portalObj = Instantiate(portalPrefab, portalHand.transform.position, portalHand.transform.rotation);
+                    portalObj.GetComponent<PortalSingle>().camera = cam;
+                    spawnedObjects.Add(portalObj);
+                    urManager.AddAction(new ModuleCreate(portalObj), spawnedObjects);
+                    spawnOnce = true;
+                    if(secondPortal)
+                    {
+                        portalObj.GetComponent<PortalSingle>().ChangeMat();
+                        portalObj.GetComponent<PortalSingle>().targetPortal = lastPortal;
+                        lastPortal.GetComponent<PortalSingle>().targetPortal = portalObj;
+                    }
+                    else
+                    {
+                        lastPortal = portalObj;
+                    }
+                    secondPortal = !secondPortal;
+                }
             }
             
 
@@ -485,6 +542,7 @@ public class Spawner : MonoBehaviour
                 axisRotator = false;
                 gapPast = false;
                 gapPresent = false;
+                portal = false;
 
                 /*for(int i = 0; i < selectionText.Count; i++)
                 {
@@ -520,6 +578,7 @@ public class Spawner : MonoBehaviour
                 axisRotator = false;
                 gapPast = false;
                 gapPresent = false;
+                portal = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -550,6 +609,7 @@ public class Spawner : MonoBehaviour
                 finish = false;
                 gapPast = false;
                 gapPresent = false;
+                portal = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -581,6 +641,7 @@ public class Spawner : MonoBehaviour
                 axisRotator = false;
                 gapPast = false;
                 gapPresent = false;
+                portal = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -612,6 +673,7 @@ public class Spawner : MonoBehaviour
                 axisRotator = false;
                 gapPast = false;
                 gapPresent = false;
+                portal = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -643,6 +705,7 @@ public class Spawner : MonoBehaviour
                 axisRotator = true;
                 gapPast = false;
                 gapPresent = false;
+                portal = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -763,6 +826,7 @@ public class Spawner : MonoBehaviour
                 axisRotator = false;
                 gapPast = true;
                 gapPresent = false;
+                portal = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -794,6 +858,7 @@ public class Spawner : MonoBehaviour
                 axisRotator = false;
                 gapPast = false;
                 gapPresent = true;
+                portal = false;
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -974,11 +1039,11 @@ public class Spawner : MonoBehaviour
             {
                 selectionText[20].GetComponent<Text>().color = Color.black;
             }
-            if (hit.transform.tag == "nextTutorial" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            if (hit.transform.tag == "nextTutorial" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f && !nextOnce)
             {
                 
-                canvas.GetComponentInChildren<tutorialManager>().restartTuto();
-
+                canvas.GetComponentInChildren<tutorialManager>().nextTutorial();
+                nextOnce = true;
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
                 selectionText[20].GetComponent<ButtonController>().changeColor(hit.transform.tag);
@@ -988,6 +1053,48 @@ public class Spawner : MonoBehaviour
                 ///tooltipText.GetComponent<Text>().text = removeCharacterHelp;
                 //Cambia la imagen que se muestra en el tooltip del menu
                 ///helpImg.GetComponent<Image>().sprite = defaultIMG;
+            }
+            else if (hit.transform.tag == "nextTutorial" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.3f && nextOnce)
+            {
+                nextOnce = false;
+            }
+            else
+            {
+                if(Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") < 0.3f && nextOnce)
+                {
+                    nextOnce = false;
+                }
+            }
+
+            if (hit.transform.tag == "Portal")
+            {
+                selectionText[21].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[21].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "Portal" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                cube = false;
+                light = false;
+                player = false;
+                checkpoint = false;
+                finish = false;
+                axisRotator = false;
+                gapPast = false;
+                gapPresent = false;
+                portal = true;
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[4].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 14;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                tooltipText.GetComponent<Text>().text = futureCubeHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                helpImg.GetComponent<Image>().sprite = futureCubeIMG;
             }
 
         }

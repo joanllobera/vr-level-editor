@@ -8,16 +8,16 @@ public class PortalSingle : MonoBehaviour
     public Vector3 targetRotation;
     public bool isObjective;
     public bool isHit;
-    private GameObject camera;
+    public GameObject camera;
     private Vector3 cameraPos;
     private LayerMask mask;
     private bool onCooldown = false;
-    private bool active = false;
+    public bool active = false;
+    public Material secondPortal;
 
     // Start is called before the first frame update
     void Start()
     {
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
         mask = LayerMask.GetMask("Portals");
     }
 
@@ -43,6 +43,11 @@ public class PortalSingle : MonoBehaviour
                     active = false;
                     targetPortal.GetComponent<PortalSingle>().Activate(false);
                 }
+            }
+            else
+            {
+                active = false;
+                targetPortal.GetComponent<PortalSingle>().Activate(false);
             }
             
         }
@@ -84,5 +89,10 @@ public class PortalSingle : MonoBehaviour
     public void Activate(bool activate)
     {
         active = activate;
+    }
+
+    public void ChangeMat()
+    {
+        GetComponent<Renderer>().material = secondPortal;
     }
 }

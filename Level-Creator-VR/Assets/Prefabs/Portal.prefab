@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5572621575605311925}
   - component: {fileID: 5572621575605311926}
   - component: {fileID: 2421765029047249939}
-  m_Layer: 9
+  - component: {fileID: 910808723}
+  m_Layer: 10
   m_Name: Portal
-  m_TagString: gap
+  m_TagString: Portals
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,8 +101,27 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5572621575605311944}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.50000036
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &910808723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5572621575605311944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77e85de708a89f4459bbd3e469f9d5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPortal: {fileID: 0}
+  targetRotation: {x: 0, y: 0, z: 0}
+  isObjective: 0
+  isHit: 0
+  camera: {fileID: 0}
+  active: 0
+  secondPortal: {fileID: 2100000, guid: 2fe5e8a8dac09c34ba8d4e9bc09feccd, type: 2}
