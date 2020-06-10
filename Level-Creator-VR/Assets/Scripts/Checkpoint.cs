@@ -12,7 +12,7 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<Movement>().SetInitialValues(this.transform);
         }
