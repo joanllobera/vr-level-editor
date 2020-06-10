@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     [SerializeField] bool isNpc;
     [SerializeField] GameObject Npc;
     private bool activateRaycasts = true;
+    private bool canLeft = true, canRight = true, canFront = true, canBottom = true, canBack = true;
     [HideInInspector] public float zRot;
     public bool changePlane = false;
     public bool alive = false;
@@ -48,18 +49,18 @@ public class Movement : MonoBehaviour
     }
     void DirectionalRaycasts(Vector3 forward, Vector3 right, Vector3 left, Vector3 down, Vector3 back)
     {
-        if(activateRaycasts)
+        RaycastHit hit;
+        //forward
+        if(canFront)
         {
-            RaycastHit hit;
-            //forward
             if (Physics.Raycast(transform.position, forward, out hit, forward.magnitude, mask))
             {
                 if (!changePlane)
                 {
                     Debug.Log("Forward hit");
                     Debug.DrawRay(transform.position, forward, Color.red);
-                    transform.Rotate(0,-180,0, Space.Self);
-                    DeactivateRaycasts();
+                    transform.Rotate(0, -180, 0, Space.Self);
+                    DeactivateRaycasts("front");
                 }
                 else
                 {
@@ -67,14 +68,18 @@ public class Movement : MonoBehaviour
                     Debug.Log("Forward hit change");
                     Debug.DrawRay(transform.position, forward, Color.red);
                     transform.Rotate(0, 0, 90, Space.Self);
-                    DeactivateRaycasts();
+                    DeactivateRaycasts("front");
                 }
             }
             else
             {
                 Debug.DrawRay(transform.position, forward, Color.white);
             }
-            //right
+        }
+        
+        //right
+        if(canRight)
+        {
             if (Physics.Raycast(transform.position, right, out hit, right.magnitude, mask))
             {
 
@@ -82,27 +87,35 @@ public class Movement : MonoBehaviour
                 Debug.DrawRay(transform.position, right, Color.red);
                 Debug.Log(transform.rotation.eulerAngles.z);
                 transform.Rotate(0, 90, 0, Space.Self);
-                DeactivateRaycasts();
+                DeactivateRaycasts("right");
             }
             else
             {
                 Debug.DrawRay(transform.position, right, Color.white);
             }
-            //left
+        }
+        
+        //left
+        if(canLeft)
+        {
             if (Physics.Raycast(transform.position, left, out hit, left.magnitude, mask))
             {
                 Debug.Log("Left hit");
                 Debug.DrawRay(transform.position, left, Color.red);
-                transform.Rotate(0, -90, 0, Space.Self); 
-                DeactivateRaycasts();
+                transform.Rotate(0, -90, 0, Space.Self);
+                DeactivateRaycasts("left");
             }
             else
             {
                 Debug.DrawRay(transform.position, left, Color.white);
             }
-            //bottom
+        }
+
+        //bottom
+        if(canBottom)
+        {
             if (Physics.Raycast(transform.position, down, out hit, down.magnitude, mask))
-            {                
+            {
                 Debug.DrawRay(transform.position, down, Color.red);
             }
             else
@@ -112,7 +125,7 @@ public class Movement : MonoBehaviour
                 if (!changePlane)
                 {
                     transform.Rotate(0, -180, 0, Space.Self);
-                    DeactivateRaycasts();
+                    DeactivateRaycasts("bottom");
                 }
                 /*else if (changePlane)
                 {
@@ -123,7 +136,11 @@ public class Movement : MonoBehaviour
                     DeactivateRaycasts();
                 }*/
             }
-            //back
+        }
+        
+        //back
+        if(canBack)
+        {
             if (Physics.Raycast(transform.position, back, out hit, back.magnitude, mask))
             {
                 Debug.DrawRay(transform.position, back, Color.red);
@@ -133,18 +150,52 @@ public class Movement : MonoBehaviour
                 Debug.Log("back hit");
                 Debug.DrawRay(transform.position, back, Color.white);
             }
-        }       
+        }
     }
 
-    void DeactivateRaycasts()
+    void DeactivateRaycasts(string ray)
     {
-        activateRaycasts = false;
-        Invoke("ActivateRaycasts", 1f);
+        switch(ray)
+        {
+            case "front":
+                canFront = false;
+                Invoke("ActivateFront", 1f);
+                break;
+            case "left":
+                canLeft = false;
+                Invoke("ActivateLeft", 1f);
+                break;
+            case "right":
+                canRight = false;
+                Invoke("ActivateRight", 1f);
+                break;
+            case "bottom":
+                canBottom = false;
+                Invoke("ActivateBottom", 1f);
+                break;
+        }       
     }
 
     void ActivateRaycasts()
     {
         activateRaycasts = true;
+    }
+
+    void ActivateFront()
+    {
+        canFront = true;
+    }
+    void ActivateLeft()
+    {
+        canLeft = true;
+    }
+    void ActivateRight()
+    {
+        canRight = true;
+    }
+    void ActivateBottom()
+    {
+        canBottom = true;
     }
 
     public void ResetPos()
@@ -156,5 +207,10 @@ public class Movement : MonoBehaviour
     public void Activate()
     {
         alive = true;
+    }
+
+    public void Deactivate()
+    {
+        alive = false;
     }
 }

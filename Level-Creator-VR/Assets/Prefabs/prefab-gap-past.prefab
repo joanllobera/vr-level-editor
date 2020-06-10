@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5572621575605311927}
   m_Layer: 9
   m_Name: prefab-gap-past
-  m_TagString: Untagged
+  m_TagString: gap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c7562e5f455634e4983b2d3a6920b3ea, type: 2}
+  - {fileID: 2100000, guid: c970402f64c838a4ca93d364475199f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

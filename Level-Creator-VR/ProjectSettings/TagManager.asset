@@ -29,6 +29,18 @@ TagManager:
   - loadSlot
   - User
   - RemovePlayer
+  - stop
+  - decreaseX
+  - increaseX
+  - decreaseY
+  - increaseY
+  - Portal
+  - gappast
+  - gappresent
+  - gap
+  - present
+  - past
+  - nextTutorial
   layers:
   - Default
   - TransparentFX
@@ -40,7 +52,7 @@ TagManager:
   - 
   - PostProcessing
   - Floor
-  - 
+  - Portals
   - 
   - 
   - 

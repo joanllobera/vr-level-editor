@@ -13,41 +13,34 @@ public class RotateAll : MonoBehaviour
     float incrementTowards;
     float incrementTowardsAux = 0;
 
-    Camera cam1, cam2;
+    Camera cam1;
 
-    GameObject player;
+    GameObject quad, player;
+    bool rotate, translate;
 
     void Start()
     {
-        player = GameObject.Find("OVRCameraRig_LevelCreator");
-        //cam1 = GameObject.Find("CenterEyeAnchor").GetComponent<Camera>();
-        cam2 = GameObject.Find("CameraMovil").GetComponent<Camera>();
+        cam1 = GameObject.Find("CameraMovil").GetComponent<Camera>();
+        //cam1.enabled = false;
+        quad = GameObject.Find("Quad");
+        //quad.SetActive(false);
+        player = GameObject.Find("Player");
+    }
 
-        //cam1.enabled = true;
-        cam2.enabled = false;
+    void swapCamera()
+    {
+        cam1.enabled = !cam1.enabled;
+        if (cam1.enabled)
+            quad.SetActive(true);
+
+        else
+            quad.SetActive(false);
     }
 
     void Update()
     {
-        //no se quins botons son del mando VR, falta configurar a botons correctes
-        if (Input.GetKeyDown(KeyCode.C))
-        //if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        if (cam1.enabled)
         {
-            // cam1.enabled = !cam1.enabled;
-            cam2.enabled = !cam2.enabled;
-
-            if(cam2.enabled)
-                player.SetActive(false);
-
-            else
-                player.SetActive(true);
-
-        }
-
-        if (cam2.enabled)
-        {
-
-
             //zoom in/out
             //if (OVRInput.Get(OVRInput.Button.PrimaryShoulder))
             if (Input.GetKey(KeyCode.G))
@@ -60,16 +53,16 @@ public class RotateAll : MonoBehaviour
                 if (incrementTowards != incrementTowardsAux)
                 {
 
-                    cam2.fieldOfView -= (incrementTowards * 2);
+                    cam1.fieldOfView -= (incrementTowards * 2);
                     incrementTowardsAux = incrementTowards;
                 }
             }
             else
             {
-            //Vector2 input = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+                //Vector2 input = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
 
-            // rotationX = input.x;
-            // rotationY = input.y;
+                // rotationX = input.x;
+                // rotationY = input.y;
                 rotationX = Input.GetAxis("Mouse X");
                 rotationY = Input.GetAxis("Mouse Y");
 
@@ -78,3 +71,4 @@ public class RotateAll : MonoBehaviour
         }
     }
 }
+
