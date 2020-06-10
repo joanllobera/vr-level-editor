@@ -6,10 +6,10 @@ In this link we can see a demonstration of the current state of the build and mo
 https://vimeo.com/427836309
 
 We also have an infographic with all the inputs needed to build a level, wich will be shown as soon as the player boots the game and can be seen again at will through an option on the main menu.
-![alt text](https://github.com/ENTI-Input-Output/vr-level-editor/tree/master/Level-Creator-VR/Images/Controles.PNG?raw=true)
+![Alt text](https://github.com/ENTI-Input-Output/vr-level-editor/tree/master/Level-Creator-VR/Images/Controles.PNG?raw=true)
 
 When talking about level saving and loading, we have developed a slot system, allowing us to save three different levels at the same time and load them at will through the save and load buttons in the main menu.
-![alt text](https://github.com/ENTI-Input-Output/vr-level-editor/tree/master/Level-Creator-VR/Images/LoadMenu.PNG?raw=true)
+![Alt text](https://github.com/ENTI-Input-Output/vr-level-editor/tree/master/Level-Creator-VR/Images/LoadMenu.PNG?raw=true)
 
 ## Team
 * Nil Belmunt
