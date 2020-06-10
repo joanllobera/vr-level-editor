@@ -54,7 +54,7 @@ public class Spawner : MonoBehaviour
     private string cubeHelp, pastCubeHelp, futureCubeHelp, dirLightHelp, checkPointHelp, characterHelp, undoHelp, redoHelp, portalHelp, axisRotatorHelp, playHelp, stopHelp, saveHelp, loadHelp, mobileHelp, removeCharacterHelp;
 
     public GameObject helpImg;
-    public Sprite defaultIMG, characterIMG, cubeIMG, pastCubeIMG, futureCubeIMG, lightIMG, rotatorIMG;
+    public Sprite defaultIMG, characterIMG, cubeIMG, pastCubeIMG, futureCubeIMG, lightIMG, rotatorIMG, checkpointIMG, portalIMG;
     void Start()
     {
         initParentRot = levelParent.transform.rotation;
@@ -74,15 +74,15 @@ public class Spawner : MonoBehaviour
             lightCanvas.SetActive(false);
 
         cubeHelp = "Cube - Use this to build the basic geometry of the level";
-        pastCubeHelp = "Past Cube - Past cubes, only visible in the ";
-        futureCubeHelp = "Future Cube - Future cubes, only visible in the ";
+        pastCubeHelp = "Gap Past - Past cubes, only walkable in the shadow";
+        futureCubeHelp = "Gap Present - Present cubes, only walkable in the light";
         dirLightHelp = "Directional Light - Use this to place a directional light in the level";
         checkPointHelp = "Checkpoint - Place a checkpoint within the level";
         characterHelp = "Character - Use this to place the character in the level";
         undoHelp = "Undo - Reverse the last command executed";
         redoHelp = "Redo - Repeat your previous command";
         portalHelp = "Portal - Place a portal inside the level";
-        axisRotatorHelp = "Axis Rotator - ";
+        axisRotatorHelp = "Axis Rotator - Changes the character walking axis";
         playHelp = "Play - Start playing your level";
         stopHelp = "Stop - Pause the gameplay";
         saveHelp = "Save - Save your current level progress";
@@ -660,7 +660,7 @@ public class Spawner : MonoBehaviour
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
                 tooltipText.GetComponent<Text>().text = checkPointHelp;
                 //Cambia la imagen que se muestra en el tooltip del menu
-                helpImg.GetComponent<Image>().sprite = defaultIMG;
+                helpImg.GetComponent<Image>().sprite = checkpointIMG;
             }
 
             // Finish
@@ -1106,13 +1106,13 @@ public class Spawner : MonoBehaviour
 
                 //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
                 selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
-                selectionText[4].GetComponent<ButtonController>().changeColor(hit.transform.tag);
-                previousButtonIndex = 14;
+                selectionText[21].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 21;
 
                 //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
-                tooltipText.GetComponent<Text>().text = futureCubeHelp;
+                tooltipText.GetComponent<Text>().text = portalHelp;
                 //Cambia la imagen que se muestra en el tooltip del menu
-                helpImg.GetComponent<Image>().sprite = futureCubeIMG;
+                helpImg.GetComponent<Image>().sprite = portalIMG;
             }
 
         }
