@@ -7,16 +7,14 @@ public class Checkpoint : MonoBehaviour
 
     void Start()
     {
-       // levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<Level_Manager>();
-       // musicManager = MusicManager.GetInstance();
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            //levelManager.npcCount++;
+            other.gameObject.GetComponent<Movement>().SetInitialValues(this.transform);
         }
     }
-
 }
