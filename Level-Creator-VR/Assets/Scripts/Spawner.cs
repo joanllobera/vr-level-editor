@@ -964,6 +964,32 @@ public class Spawner : MonoBehaviour
                 //Cambia la imagen que se muestra en el tooltip del menu
                 helpImg.GetComponent<Image>().sprite = defaultIMG;
             }
+
+            // Next tutorial
+            if (hit.transform.tag == "nextTutorial")
+            {
+                selectionText[20].GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                selectionText[20].GetComponent<Text>().color = Color.black;
+            }
+            if (hit.transform.tag == "nextTutorial" && Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.3f)
+            {
+                
+                canvas.GetComponentInChildren<tutorialManager>().restartTuto();
+
+                //Poner el botón de color amarillo y restablecer el color del botón previamente pulsado
+                selectionText[previousButtonIndex].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                selectionText[20].GetComponent<ButtonController>().changeColor(hit.transform.tag);
+                previousButtonIndex = 20;
+
+                //Cambia el texto de ayuda mostrado en el tooltip por el del boton al que se está apuntando
+                ///tooltipText.GetComponent<Text>().text = removeCharacterHelp;
+                //Cambia la imagen que se muestra en el tooltip del menu
+                ///helpImg.GetComponent<Image>().sprite = defaultIMG;
+            }
+
         }
         
     }
