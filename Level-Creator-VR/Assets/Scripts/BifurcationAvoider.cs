@@ -6,6 +6,7 @@ public class BifurcationAvoider : MonoBehaviour
 {
     public byte raycastCount;
     public bool isCorner;
+    public bool isNextToCorner;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,10 @@ public class BifurcationAvoider : MonoBehaviour
             if(hit.transform.tag == "cube")
             {
                 raycastCount++;
+                if(hit.transform.GetComponent<BifurcationAvoider>().isCorner)
+                {
+                    isNextToCorner = true;
+                }
             }
         }
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1f))
@@ -31,6 +36,10 @@ public class BifurcationAvoider : MonoBehaviour
             if(hit.transform.tag == "cube")
             {
                 raycastCount++;
+                if(hit.transform.GetComponent<BifurcationAvoider>().isCorner)
+                {
+                    isNextToCorner = true;
+                }
             }
         }
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, 1f))
@@ -38,6 +47,10 @@ public class BifurcationAvoider : MonoBehaviour
             if(hit.transform.tag == "cube")
             {
                 raycastCount++;
+                if(hit.transform.GetComponent<BifurcationAvoider>().isCorner)
+                {
+                    isNextToCorner = true;
+                }
             }
         }
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1f))
@@ -45,6 +58,10 @@ public class BifurcationAvoider : MonoBehaviour
             if(hit.transform.tag == "cube")
             {
                 raycastCount++;
+                if(hit.transform.GetComponent<BifurcationAvoider>().isCorner)
+                {
+                    isNextToCorner = true;
+                }
             }
         }
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1f))
@@ -52,6 +69,10 @@ public class BifurcationAvoider : MonoBehaviour
             if(hit.transform.tag == "cube")
             {
                 raycastCount++;
+                if(hit.transform.GetComponent<BifurcationAvoider>().isCorner)
+                {
+                    isNextToCorner = true;
+                }
             }
         }
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1f))
@@ -59,6 +80,10 @@ public class BifurcationAvoider : MonoBehaviour
             if(hit.transform.tag == "cube")
             {
                 raycastCount++;
+                if(hit.transform.GetComponent<BifurcationAvoider>().isCorner)
+                {
+                    isNextToCorner = true;
+                }
             }
         }
 
